@@ -1,10 +1,16 @@
-import { AppBar, makeStyles, Paper, Toolbar, Box } from "@material-ui/core";
+import {
+  AppBar,
+  Container,
+  makeStyles,
+  Paper,
+  Toolbar,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    color: "#FF6AC4",
+    color: "#FF81A6",
     textAlign: "left",
     fontFamily: "Ruthie",
     fontSize: "48px",
@@ -12,42 +18,59 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
   link: {
-    color: "#FF6AC4",
-    marginRight: theme.spacing(4),
+    color: "#FF81A6",
+    marginRight: theme.spacing(5),
+    fontFamily: "montserrat",
     fontSize: "24px",
+    fontWeight: "thin",
+    letterSpacing: "0.1rem",
     textDecoration: "none",
   },
   appbar: {
     background: "#FFFFFF",
+    position: "fixed",
   },
   toolbar: {
-    minHeight: 128,
+    minHeight: 110,
   },
   image: {
-    backgroundSize: "auto 100%",
+    backgroundSize: "100px 100%",
     width: "100vw",
-    opacity: 0.6,
+    position: "fixed",
+    // verticalAlign: "bottom",
   },
-  paper: {
-    position: "relative",
-    display: "fixed",
-    background: "rgba(243, 1, 227, 0.50)",
+  topContainer: {
+    textAlign: "center",
   },
   title: {
     fontFamily: "Ruthie",
     position: "absolute",
     color: "white",
-    top: "35%",
-    left: "40%",
 
-    fontSize: "100px",
+    // height: "70%",
+    top: "16%",
+    // left: "40%",
+    // top: "50%",
+    left: "50%",
+
+    transform: "translate(-50%,-50%)",
+
+    fontSize: "120px",
     fontWeight: "300",
+  },
+  subtitle: {
+    position: "absolute",
+    color: "white",
+    top: "28%",
+    left: "30%",
+    letterSpacing: "0.3em",
+    fontSize: "25px",
+    fontWeight: "400",
   },
 }));
 
 const Navbar = () => {
   const classes = useStyles();
-  const title = "La Fontaine...";
   return (
     <div>
       <AppBar position="static" className={classes.appbar}>
@@ -58,9 +81,6 @@ const Navbar = () => {
           <Link to="/news" className={classes.link}>
             News
           </Link>
-          <Link to="/concert" className={classes.link}>
-            Concerts
-          </Link>
           <Link to="/about" className={classes.link}>
             About
           </Link>
@@ -69,10 +89,6 @@ const Navbar = () => {
           </Link>
         </Toolbar>
       </AppBar>
-      <Paper className={classes.paper}>
-        <img className={classes.image} src="top.jpg" />
-        <h1 className={classes.title}>{title}</h1>
-      </Paper>
     </div>
   );
 };
