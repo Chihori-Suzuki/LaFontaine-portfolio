@@ -1,10 +1,12 @@
 import { Grid, makeStyles, Paper } from "@material-ui/core";
+import Brightness1Icon from "@material-ui/icons/Brightness1";
 
 const useStyle = makeStyles(() => {
   return {
     topPaper: {
       backgroundImage: `url("/about.jpg")`,
-      backgroundSize: "auto auto",
+      backgroundSize: "100% auto",
+      backgroundRepeat: "no-repeat",
       width: "100vw",
       height: "75vh",
       display: "block",
@@ -48,18 +50,37 @@ const useStyle = makeStyles(() => {
       fontWeight: "300",
       marginBottom: "10%",
     },
+    items: {
+      // overflow: "hidden",
+      listStyle: "none",
+      minWidth: "100%",
+      position: "relative",
+      paddingBottom: "10%",
+    },
+    icon: {
+      float: "left",
+      color: "#FF81A6",
+      position: "relative",
+      overflow: "hidden",
+      marginLeft: "20px",
+      padding: 0,
+    },
     timelineContent: {
+      float: "left",
       borderLeft: "3px #FF81A6 solid",
+      marginLeft: "30px",
       paddingLeft: "30px",
-      "&::before": {
-        content: "",
-        width: "12px",
-        height: "12px",
-        fontSize: "60px",
-        position: "absolute",
-        color: "#FF81A6",
-        borderRadius: "100%",
-      },
+      paddingBottom: "20px",
+      position: "absolute",
+      // "&::before": {
+      //   content: "\u2022",
+      //   width: "12px",
+      //   height: "12px",
+      //   fontSize: "60px",
+      //   position: "absolute",
+      //   color: "#FF81A6",
+      //   borderRadius: "100%",
+      // },
     },
     paragraph2: {
       maxWidth: "100vw",
@@ -67,6 +88,7 @@ const useStyle = makeStyles(() => {
       textAlign: "left",
       fontSize: "20px",
       fontWeight: "300",
+      margin: 0,
     },
   };
 });
@@ -103,21 +125,43 @@ const About = () => {
             　「本物の、上質な音楽を常に創り続ける場所であること」​　を目指して。～
           </p>
         </Grid>
-        <Grid item>
+        <li className={classes.items}>
+          <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
             <p className={classes.paragraph2}>
               2016年12月、結成。
               <br /> 栃木を中心に活動を開始。
             </p>
           </div>
+        </li>
+        <li className={classes.items}>
+          <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
             <p className={classes.paragraph2}>
-              団員数：30名前後(2017年3月現在)　　
-              年齢層：10～20代中心(大学生以上) 練習場所
-              (頻度)：栃木・東京2か所(それぞれの場所にて月2回)
+              2017年10月
+              <br />
+              新潟県にて初の単独コンサートを実施。 <br />
+              本格的に活動をスタート。
             </p>
           </div>
-        </Grid>
+        </li>
+        <li className={classes.items}>
+          <Brightness1Icon className={classes.icon} />
+          <div className={classes.timelineContent}>
+            <p className={classes.paragraph2}>
+              2018年2月、 第一回定期演奏会を実施。
+            </p>
+          </div>
+        </li>
+        <li className={classes.items}>
+          <Brightness1Icon className={classes.icon} />
+          <div className={classes.timelineContent}>
+            <p className={classes.paragraph2}>
+              2021年現在、 さらなる高みを目指して活動中.
+              <br />
+            </p>
+          </div>
+        </li>
       </Grid>
     </div>
   );

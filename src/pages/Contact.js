@@ -4,7 +4,8 @@ const useStyle = makeStyles((theme) => {
   return {
     topPaper: {
       backgroundImage: `url("/topImage.jpg")`,
-      backgroundSize: "auto 100%",
+      backgroundSize: "100% auto",
+      backgroundRepeat: "no-repeat",
       width: "100vw",
       height: "75vh",
       display: "block",

@@ -7,6 +7,8 @@ import Footer from "./Footer";
 import { makeStyles } from "@material-ui/core";
 import Contact from "../pages/Contact";
 import News from "../pages/News";
+import NewPost from "../pages/NewsPost";
+import Login from "../pages/Login";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -39,6 +41,12 @@ function Layout() {
             </Route>
             <Route path="/contact">
               <Contact />
+            </Route>
+            <Route path="/post">
+              <NewPost />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
           </Switch>
         </div>

@@ -1,10 +1,12 @@
-import { Paper, makeStyles } from "@material-ui/core";
+import { Paper, makeStyles, Grid, Box } from "@material-ui/core";
+import NewsContents from "../comps/NewsContents";
 
 const useStyle = makeStyles((theme) => {
   return {
     topPaper: {
       backgroundImage: `url("/News.jpg")`,
-      backgroundSize: "auto 100%",
+      backgroundSize: "100% auto",
+      backgroundRepeat: "no-repeat",
       width: "100vw",
       height: "75vh",
       display: "block",
@@ -22,6 +24,12 @@ const useStyle = makeStyles((theme) => {
       fontSize: "120px",
       fontWeight: "300",
     },
+    grid: {
+      paddingTop: "5%",
+      paddingBottom: "5%",
+      paddingLeft: "30%",
+      paddingRight: "30%",
+    },
   };
 });
 
@@ -29,10 +37,17 @@ const News = () => {
   const classes = useStyle();
   const topTitle = "News";
   return (
-    <div className="contact">
+    <div className="news">
       <Paper className={classes.topPaper}>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>
+      <Grid container className={classes.grid}>
+        <Grid item>
+          <Box>
+            <NewsContents />
+          </Box>
+        </Grid>
+      </Grid>
     </div>
   );
 };
