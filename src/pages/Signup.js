@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
-import { Alert } from "@material-ui/lab";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const useStyle = makeStyles(() => {
   return {
@@ -23,18 +23,30 @@ const useStyle = makeStyles(() => {
       paddingLeft: "30%",
       paddingRight: "30%",
     },
+    label: {
+      textAlign: "left",
+      display: "block",
+    },
+    form: {
+      flexDirection: "column",
+    },
+    input: {
+      border: "1px solid #ddd",
+      display: "block",
+    },
     loginbtn: {
       background: "#FF7193",
       color: "white",
     },
   };
 });
-const Login = () => {
+const Signup = () => {
   const classes = useStyle();
-  const topTitle = "Login";
+  const topTitle = "Sign up";
   const emailRef = useRef();
   const passRef = useRef();
-  const { login } = useAuth();
+  const passComfRef = useRef();
+  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -42,13 +54,16 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (passRef.current.value !== passComfRef.current.value) {
+      return setError("Passwords do not match");
+    }
     try {
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passRef.current.value);
+      await signup(emailRef.current.value, passRef.current.value);
       history.push("/post");
     } catch {
-      setError("Failed to sign in");
+      setError("Failed to create an account");
     }
     setLoading(false);
   }
@@ -88,6 +103,17 @@ const Login = () => {
             inputRef={passRef}
           />
         </Grid>
+        <Grid item container>
+          <TextField
+            id="password-confirm"
+            type="password"
+            label="password confirm"
+            fullWidth
+            variant="outlined"
+            required
+            inputRef={passComfRef}
+          />
+        </Grid>
         <Grid item>
           <Button
             disabled={loading}
@@ -95,16 +121,16 @@ const Login = () => {
             type="submit"
             className={classes.loginbtn}
           >
-            Login
+            Sign up
           </Button>
         </Grid>
         <Grid item>
-          <p>Need an account?</p>
-          <Link to="/signup">Sign up</Link>
+          <p>Already have a account?</p>
+          <Link to="/login">Login</Link>
         </Grid>
       </Grid>
     </form>
   );
 };
 
-export default Login;
+export default Signup;

@@ -9,6 +9,8 @@ import Contact from "../pages/Contact";
 import News from "../pages/News";
 import NewPost from "../pages/NewsPost";
 import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import PrivateRoute from "../comps/PrivateRoute";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -42,11 +44,14 @@ function Layout() {
             <Route path="/contact">
               <Contact />
             </Route>
-            <Route path="/post">
+            <PrivateRoute path="/post">
               <NewPost />
-            </Route>
+            </PrivateRoute>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/signup">
+              <Signup />
             </Route>
           </Switch>
         </div>

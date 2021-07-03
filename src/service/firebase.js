@@ -1,8 +1,10 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "firebase/firestore";
 
-firebase.initializeApp({
+const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
@@ -13,16 +15,5 @@ firebase.initializeApp({
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
 
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-
-export const signInWithGoogle = () => {
-  firebase
-    .auth()
-    .signInWithPopup(googleProvider)
-    .then((res) => {
-      console.log(res.user);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
+export const auth = app.auth();
+export default app;
