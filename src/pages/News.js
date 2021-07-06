@@ -4,13 +4,12 @@ import NewsContents from "../comps/NewsContents";
 const useStyle = makeStyles((theme) => {
   return {
     topPaper: {
-      backgroundImage: `url("/News.jpg")`,
-      backgroundSize: "100% auto",
-      backgroundRepeat: "no-repeat",
-      width: "100vw",
-      height: "75vh",
       display: "block",
       position: "relative",
+    },
+    image: {
+      width: "100%",
+      height: "100%",
     },
     topTitle: {
       fontFamily: "Dancing Script",
@@ -39,6 +38,7 @@ const News = () => {
   return (
     <div className="news">
       <Paper className={classes.topPaper}>
+        <img className={classes.image} src="News.jpg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>
       <Grid container className={classes.grid}>

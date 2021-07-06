@@ -44,9 +44,10 @@ function Layout() {
             <Route path="/contact">
               <Contact />
             </Route>
-            <PrivateRoute path="/post">
-              <NewPost />
-            </PrivateRoute>
+            {/* <PrivateRoute path="/post">
+              <NewPost /> */}
+            <PrivateRoute path="/post" component={NewPost} />
+            {/* </PrivateRoute> */}
             <Route path="/login">
               <Login />
             </Route>

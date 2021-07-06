@@ -4,23 +4,19 @@ import Brightness1Icon from "@material-ui/icons/Brightness1";
 const useStyle = makeStyles(() => {
   return {
     topPaper: {
-      backgroundImage: `url("/about.jpg")`,
-      backgroundSize: "100% auto",
-      backgroundRepeat: "no-repeat",
-      width: "100vw",
-      height: "75vh",
       display: "block",
       position: "relative",
     },
-    topContainer: {
-      textAlign: "center",
+    image: {
+      width: "100%",
+      height: "100%",
     },
     topTitle: {
       fontFamily: "Dancing Script",
       letterSpacing: "0.2rem",
       position: "absolute",
       color: "white",
-      top: "60%",
+      top: "50%",
       left: "50%",
       transform: "translate(-50%,-50%)",
       margin: 0,
@@ -42,6 +38,7 @@ const useStyle = makeStyles(() => {
       color: "#FF81A6",
       fontWeight: "500",
     },
+
     paragraph: {
       maxWidth: "100vw",
       overflowWrap: "break-word",
@@ -55,7 +52,8 @@ const useStyle = makeStyles(() => {
       listStyle: "none",
       minWidth: "100%",
       position: "relative",
-      paddingBottom: "10%",
+      // paddingBottom: "10%",
+      marginBottom: "10%",
     },
     icon: {
       float: "left",
@@ -70,7 +68,8 @@ const useStyle = makeStyles(() => {
       borderLeft: "3px #FF81A6 solid",
       marginLeft: "30px",
       paddingLeft: "30px",
-      paddingBottom: "20px",
+      // paddingBottom: "20px",
+      paddingBottom: "10%",
       position: "absolute",
       // "&::before": {
       //   content: "\u2022",
@@ -98,6 +97,7 @@ const About = () => {
   return (
     <div className="about">
       <Paper className={classes.topPaper}>
+        <img className={classes.image} src="about.jpg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>
       <Grid
