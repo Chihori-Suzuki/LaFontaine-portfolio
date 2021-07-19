@@ -1,4 +1,7 @@
 import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import firebase from "../service/firebase";
+import { storage } from "../service/firebase";
 
 const useStyle = makeStyles(() => {
   return {
@@ -14,43 +17,79 @@ const useStyle = makeStyles(() => {
     paper: {
       display: "flex",
       padding: "5%",
+      width: "100%",
+      marginBottom: "5%",
     },
-    // items: {
-    //   display: "flex",
-    // },
     item2: {
       overflowWrap: "break-word",
       overflow: "hidden",
+      textAlign: "center",
+    },
+    linkBtn: {
+      background: "#FF7193",
+      color: "white",
     },
   };
 });
 const NewsContents = () => {
   const classes = useStyle();
+
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const ref = firebase.firestore().collection("news");
+
+  function getNews() {
+    setLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setNews(items);
+      setLoading(false);
+    });
+  }
+  useEffect(() => {
+    getNews();
+  }, []);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
-    <Paper className={classes.paper}>
-      {/* // check it out */}
-      <Grid container wrap="nowrap" direction="row" spacing={2}>
-        <Grid item className={classes.image}>
-          <img src="cd.jpg" className={classes.img} height={100} width={100} />
-        </Grid>
-        <Grid item className={classes.item2} container direction="column">
-          <Grid item>
-            <h5>What is Lorem Ipsum?</h5>
-          </Grid>
-          <Grid item>
-            <Typography>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Button>Link</Button>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
+    <div>
+      {news.map((item) => (
+        <div key={item.id}>
+          <Paper className={classes.paper}>
+            <Grid container wrap="nowrap" direction="column" spacing={2}>
+              <Grid item className={classes.image}>
+                <img
+                  src={item.image}
+                  className={classes.img}
+                  height="auto"
+                  width="100%"
+                />
+              </Grid>
+              <Grid item className={classes.item2} container direction="column">
+                <Grid item>
+                  <h3>{item.title}</h3>
+                  <p>{item.date}</p>
+                </Grid>
+                <Grid item>
+                  <p>{item.detail}</p>
+                </Grid>
+                <Grid item>
+                  <Button className={classes.linkBtn}>Link</Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+        </div>
+      ))}
+    </div>
   );
 };
 

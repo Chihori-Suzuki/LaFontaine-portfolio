@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import "firebase/storage";
 import "firebase/firestore";
 
 const app = firebase.initializeApp({
@@ -16,4 +15,8 @@ const app = firebase.initializeApp({
 });
 
 export const auth = app.auth();
+export const db = firebase.firestore();
+
+export const storage = firebase.storage();
+
 export default app;

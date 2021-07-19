@@ -1,7 +1,7 @@
 import { Grid, makeStyles, Paper } from "@material-ui/core";
 import Brightness1Icon from "@material-ui/icons/Brightness1";
 
-const useStyle = makeStyles(() => {
+const useStyle = makeStyles((theme) => {
   return {
     topPaper: {
       display: "block",
@@ -27,10 +27,21 @@ const useStyle = makeStyles(() => {
     },
     grid: {
       textAlign: "center",
-      paddingLeft: "30%",
-      paddingRight: "30%",
       paddingTop: "5%",
       paddingBottom: "5%",
+
+      [theme.breakpoints.down("sm")]: {
+        paddingLeft: "10%",
+        paddingRight: "10%",
+      },
+      [theme.breakpoints.up("md")]: {
+        paddingLeft: "20%",
+        paddingRight: "20%",
+      },
+      [theme.breakpoints.up("lg")]: {
+        paddingLeft: "25%",
+        paddingRight: "25%",
+      },
     },
     logo: {
       fontFamily: "Ruthie",
@@ -68,18 +79,8 @@ const useStyle = makeStyles(() => {
       borderLeft: "3px #FF81A6 solid",
       marginLeft: "30px",
       paddingLeft: "30px",
-      // paddingBottom: "20px",
       paddingBottom: "10%",
       position: "absolute",
-      // "&::before": {
-      //   content: "\u2022",
-      //   width: "12px",
-      //   height: "12px",
-      //   fontSize: "60px",
-      //   position: "absolute",
-      //   color: "#FF81A6",
-      //   borderRadius: "100%",
-      // },
     },
     paragraph2: {
       maxWidth: "100vw",
@@ -96,7 +97,7 @@ const About = () => {
   const topTitle = "About us";
   return (
     <div className="about">
-      <Paper className={classes.topPaper}>
+      <Paper className={classes.topPaper} elevation={0}>
         <img className={classes.image} src="about.jpg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>

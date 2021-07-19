@@ -1,4 +1,6 @@
 import { Paper, makeStyles, Grid, TextField, Button } from "@material-ui/core";
+import { useState } from "react";
+import { db } from "../service/firebase";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -24,9 +26,21 @@ const useStyle = makeStyles((theme) => {
     },
     grid: {
       paddingTop: "8%",
-      paddingLeft: "30%",
-      paddingRight: "30%",
       paddingBottom: "8%",
+      textAlign: "center",
+
+      [theme.breakpoints.down("sm")]: {
+        paddingLeft: "10%",
+        paddingRight: "10%",
+      },
+      [theme.breakpoints.up("md")]: {
+        paddingLeft: "20%",
+        paddingRight: "20%",
+      },
+      [theme.breakpoints.up("lg")]: {
+        paddingLeft: "25%",
+        paddingRight: "25%",
+      },
     },
 
     paragraph: {
@@ -44,8 +58,15 @@ const useStyle = makeStyles((theme) => {
     },
     submitBtn: {
       color: "white",
+      fontSize: "16px",
       background: "#FF7193",
       margin: "5%",
+      paddingLeft: "3%",
+      paddingRight: "3%",
+      paddingTop: "2%",
+      paddingBottom: "2%",
+      border: "none",
+      borderRadius: "4px",
     },
   };
 });
@@ -53,71 +74,113 @@ const useStyle = makeStyles((theme) => {
 const Contact = () => {
   const classes = useStyle();
   const topTitle = "Contact";
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [loader, setLoader] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoader(true);
+
+    db.collection("contacts")
+      .add({
+        name: name,
+        email: email,
+        message: message,
+      })
+      .then(() => {
+        alert("メッセージを受け付けました🥰");
+        setLoader(false);
+      })
+      .catch((error) => {
+        alert(error.message);
+        setLoader(false);
+      });
+
+    setName("");
+    setEmail("");
+    setMessage("");
+  }
+
   return (
     <div className="contact">
-      <Paper className={classes.topPaper}>
+      <Paper className={classes.topPaper} elevation={0}>
         <img className={classes.image} src="topImage.jpg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>
-      <Grid container direction="column" className={classes.grid}>
-        <Grid item>
-          <h3>お問い合わせ</h3>
-        </Grid>
-        <Grid item>
-          <p className={classes.paragraph}>
-            ご質問等ございましたら、こちらにお願いします。
-            <br />
-            <br />
-            また、La Fontaineは新規団員を募集中です。
-            もし興味を持っていただけた方がいらっしゃいましたら、お気軽にお問い合わせください。
-            <br />
-            私たちと同じような想いで、「合唱がしたい！」と思ってくださる方の入団を、心よりお待ちしております♪
-          </p>
-        </Grid>
-        <Grid item container spacing={2}>
-          <Grid item sm={12} md={6}>
+
+      <form onSubmit={handleSubmit}>
+        <Grid container direction="column" className={classes.grid}>
+          <Grid item>
+            <h3>お問い合わせ</h3>
+          </Grid>
+          <Grid item>
+            <p className={classes.paragraph}>
+              ご質問等ございましたら、こちらにお願いします。
+              <br />
+              <br />
+              また、La Fontaineは新規団員を募集中です。
+              もし興味を持っていただけた方がいらっしゃいましたら、お気軽にお問い合わせください。
+              <br />
+              私たちと同じような想いで、「合唱がしたい！」と思ってくださる方の入団を、心よりお待ちしております♪
+            </p>
+          </Grid>
+          <Grid item container spacing={2}>
+            <Grid item sm={12} md={6}>
+              <TextField
+                required
+                className={classes.flex}
+                id="name-required"
+                fullWidth
+                label="name"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <TextField
+                required
+                className={classes.flex}
+                type="email"
+                id="email-required"
+                fullWidth
+                label="email"
+                variant="outlined"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Grid>
+          </Grid>
+          <Grid item>
             <TextField
               required
               className={classes.flex}
-              id="name-required"
-              fullWidth
-              label="name"
+              id="text-required"
+              label="message"
               variant="outlined"
+              fullWidth
+              multiline
+              rows={10}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </Grid>
-          <Grid item sm={12} md={6}>
-            <TextField
-              required
-              className={classes.flex}
-              id="email-required"
-              fullWidth
-              label="email"
-              variant="outlined"
-            />
+          <Grid item container justify="center">
+            <button
+              variant="contained"
+              type="submit"
+              size="medium"
+              className={classes.submitBtn}
+              style={{ background: loader ? "#ccc" : "#FF7193" }}
+            >
+              Submit
+            </button>
           </Grid>
         </Grid>
-        <Grid item>
-          <TextField
-            required
-            className={classes.flex}
-            id="text-required"
-            label="text"
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={10}
-          />
-        </Grid>
-        <Grid item container justify="center">
-          <Button
-            variant="contained"
-            size="medium"
-            className={classes.submitBtn}
-          >
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
+      </form>
     </div>
   );
 };

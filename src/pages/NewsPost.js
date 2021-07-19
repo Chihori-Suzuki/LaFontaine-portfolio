@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
+import { storage } from "../service/firebase";
+import firebase from "../service/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyle = makeStyles(() => {
   return {
@@ -21,7 +24,9 @@ const useStyle = makeStyles(() => {
       paddingLeft: "30%",
       paddingRight: "30%",
     },
-    TextField: {},
+    marginBtn: {
+      marginBottom: "10%",
+    },
     submitbtn: {
       background: "#FF7193",
       color: "white",
@@ -34,6 +39,10 @@ const NewPost = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const [title, setTitle] = useState("");
+  const [detail, setDetail] = useState("");
+  let today = new Date();
+  let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
   async function handleLogout() {
     setError("");
@@ -45,6 +54,67 @@ const NewPost = () => {
       setError("Failed to log out");
     }
   }
+
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  const ref = firebase.firestore().collection("news");
+
+  const handleChange = (e) => {
+    console.log(e);
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  // upload image
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytestTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            setUrl(url);
+          });
+      }
+    );
+  };
+
+  // add to firestore database
+  function addNews(addNews) {
+    ref
+      .doc(addNews.id)
+      .set(addNews)
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  // delete the data from firestore database
+  function deleteNews(delNews) {
+    ref
+      .doc(delNews.id)
+      .delete()
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  // update
+  function editNews(updatedNews) {}
 
   return (
     <div>
@@ -65,11 +135,13 @@ const NewPost = () => {
         <Grid item container>
           <TextField
             id="title"
+            value={title}
             fullWidth
             label="title"
             multiline
             variant="outlined"
             className={classes.TextField}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </Grid>
         <Grid item container>
@@ -82,10 +154,38 @@ const NewPost = () => {
             variant="outlined"
             multiline
             rows={6}
+            onChange={(e) => setDetail(e.target.value)}
           />
         </Grid>
+        <Grid item container justify="center">
+          <p>載せたい写真を選択してね</p>
+        </Grid>
+        <Grid item container justify="center">
+          <progress value={progress} max="100" />
+        </Grid>
+        <Grid item container justify="center" className={classes.marginBtn}>
+          <input type="file" onChange={handleChange}></input>
+          <Button variant="contained" onClick={handleUpload}>
+            Upload
+          </Button>
+        </Grid>
+        <Grid item container justify="center">
+          <img
+            src={url || "http://via.placeholder.com/100x100"}
+            alt="image"
+            width="100%"
+            height="auto%"
+          ></img>
+        </Grid>
+
         <Grid item>
-          <Button variant="contained" className={classes.submitbtn}>
+          <Button
+            variant="contained"
+            className={classes.submitbtn}
+            onClick={() =>
+              addNews({ title, detail, date: date, image: url, id: uuidv4() })
+            }
+          >
             submit
           </Button>
         </Grid>
