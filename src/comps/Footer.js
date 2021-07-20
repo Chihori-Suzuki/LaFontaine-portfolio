@@ -3,7 +3,7 @@ import { Grid, makeStyles, Paper } from "@material-ui/core";
 const useStyle = makeStyles(() => {
   return {
     footer: {
-      backgroundColor: "#FFDFEE",
+      backgroundColor: "#FFCFDB",
       width: "100%",
     },
     title: {
@@ -12,9 +12,11 @@ const useStyle = makeStyles(() => {
       color: "#FF81A6",
       marginBottom: 0,
       marginTop: "10%",
+      fontWeight: "500",
     },
     text: {
       color: "#FF81A6",
+      fontWeight: "500",
     },
     grid: {
       paddingLeft: "30%",
@@ -31,12 +33,17 @@ const Footer = () => {
   const classes = useStyle();
   return (
     <footer className={classes.footer}>
-      <Grid container className={classes.grid}>
+      <Grid
+        container
+        className={classes.grid}
+        spacing={6}
+        justify="space-around"
+      >
         <Grid item md={4} container className={classes.items}>
           <p className={classes.title}>La Fontaine...</p>
           <p className={classes.text}>mail: LaFontaine@gmail.com</p>
         </Grid>
-        <Grid item md={4} container className={classes.items}>
+        {/* <Grid item md={4} container className={classes.items}>
           <p className={classes.text}>
             Page - Top
             <br />
@@ -46,7 +53,7 @@ const Footer = () => {
             <br />
             Contact
           </p>
-        </Grid>
+        </Grid> */}
         <Grid item md={4} container className={classes.items}>
           <p className={classes.text}>Follow us on the web</p>
         </Grid>

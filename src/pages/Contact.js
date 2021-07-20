@@ -80,6 +80,11 @@ const Contact = () => {
 
   const [loader, setLoader] = useState(false);
 
+  // const functions = require("firebase-functions");
+  // const nodemailer = require("nodemailer");
+
+  // const cors = require("cors")({ origin: true });
+
   async function handleSubmit(e) {
     e.preventDefault();
     setLoader(true);

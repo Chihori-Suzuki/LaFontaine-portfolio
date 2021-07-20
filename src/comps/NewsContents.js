@@ -1,7 +1,8 @@
 import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
-import { storage } from "../service/firebase";
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router";
 
 const useStyle = makeStyles(() => {
   return {
@@ -25,9 +26,10 @@ const useStyle = makeStyles(() => {
       overflow: "hidden",
       textAlign: "center",
     },
-    linkBtn: {
+    btn: {
       background: "#FF7193",
       color: "white",
+      margin: "3%",
     },
   };
 });
@@ -36,9 +38,22 @@ const NewsContents = () => {
 
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [url, setUrl] = useState("");
+  const [showButtons, setShowButtons] = useState(false);
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
 
   const ref = firebase.firestore().collection("news");
+
+  async function handleLogout() {
+    setError("");
+    try {
+      await logout();
+      history.push("/login");
+    } catch {
+      setError("Failed to log out");
+    }
+  }
 
   function getNews() {
     setLoading(true);
@@ -81,9 +96,19 @@ const NewsContents = () => {
                 <Grid item>
                   <p>{item.detail}</p>
                 </Grid>
-                <Grid item>
-                  <Button className={classes.linkBtn}>Link</Button>
-                </Grid>
+                {currentUser ? (
+                  <Grid item container direction="column" justify="center">
+                    <Grid item>
+                      <Button className={classes.btn}>Edit</Button>
+                      <Button className={classes.btn}>Delete</Button>
+                    </Grid>
+                    <Grid item>
+                      <Button variant="link" onClick={handleLogout}>
+                        Log out
+                      </Button>
+                    </Grid>
+                  </Grid>
+                ) : null}
               </Grid>
             </Grid>
           </Paper>

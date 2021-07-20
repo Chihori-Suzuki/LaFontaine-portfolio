@@ -24,8 +24,16 @@ const useStyle = makeStyles(() => {
       paddingRight: "30%",
     },
     loginbtn: {
-      background: "#FF7193",
       color: "white",
+      fontSize: "16px",
+      background: "#FF7193",
+      margin: "5%",
+      paddingLeft: "3%",
+      paddingRight: "3%",
+      paddingTop: "2%",
+      paddingBottom: "2%",
+      border: "none",
+      borderRadius: "4px",
     },
   };
 });
@@ -38,6 +46,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,7 +55,8 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passRef.current.value);
-      history.push("/post");
+      // history.push("/post");
+      setShowMenu(true);
     } catch {
       setError("Failed to sign in");
     }
@@ -88,20 +98,43 @@ const Login = () => {
             inputRef={passRef}
           />
         </Grid>
-        <Grid item>
-          <Button
-            disabled={loading}
-            variant="contained"
-            type="submit"
+        <Grid item container justify="center">
+          <button
+            id="login-btn"
             className={classes.loginbtn}
+            disabled={loading}
+            type="submit"
           >
             Login
-          </Button>
+          </button>
         </Grid>
-        <Grid item>
-          <p>Need an account?</p>
-          <Link to="/signup">Sign up</Link>
-        </Grid>
+
+        {showMenu ? (
+          <Grid item id="menu" container justify="center">
+            <Grid item>
+              <p>☆ 会員専用メニュー ☆</p>
+            </Grid>
+            <Grid item container direction="row" justify="center">
+              <Button
+                id="signup-btn"
+                className={classes.loginbtn}
+                href="/signup"
+              >
+                Sign Up
+              </Button>
+              <Button
+                id="contactlist-btn"
+                className={classes.loginbtn}
+                href="/contactlist"
+              >
+                Contact List
+              </Button>
+              <Button className={classes.loginbtn} href="/news">
+                News Edit
+              </Button>
+            </Grid>
+          </Grid>
+        ) : null}
       </Grid>
     </form>
   );

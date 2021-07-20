@@ -37,7 +37,7 @@ const NewPost = () => {
   const classes = useStyle();
   const topTitle = "Create Latest News";
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
   const history = useHistory();
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
@@ -46,7 +46,6 @@ const NewPost = () => {
 
   async function handleLogout() {
     setError("");
-
     try {
       await logout();
       history.push("/login");

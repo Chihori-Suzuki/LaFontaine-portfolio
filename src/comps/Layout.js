@@ -38,10 +38,10 @@ function Layout() {
             <Route path="/about">
               <About />
             </Route>
-            <Route path="/news">
+            <Route exact path="/news">
               <News />
             </Route>
-            <Route path="/contact">
+            <Route exact path="/contact">
               <Contact />
             </Route>
             {/* <PrivateRoute path="/post">
