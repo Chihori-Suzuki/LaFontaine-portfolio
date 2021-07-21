@@ -103,15 +103,6 @@ const NewPost = () => {
         console.error(err);
       });
   }
-  // delete the data from firestore database
-  function deleteNews(delNews) {
-    ref
-      .doc(delNews.id)
-      .delete()
-      .catch((err) => {
-        console.error(err);
-      });
-  }
   // update
   function editNews(updatedNews) {}
 

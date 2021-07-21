@@ -84,6 +84,16 @@ const useStyle = makeStyles(() => {
       lineHeight: "2rem",
       textAlign: "left",
     },
+    youtube: {
+      position: "relative",
+      paddingBottom: "56.25%",
+    },
+    iframe: {
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      border: "none",
+    },
   };
 });
 const Home = () => {
@@ -99,8 +109,16 @@ const Home = () => {
       </Paper>
       <Paper className={classes.paper}>
         <p className={classes.title}>Our music</p>
-        <Grid container spacing={3}>
-          <Grid item sm={12} md={6}>
+        <Grid container className={classes.youtube}>
+          <iframe
+            className={classes.iframe}
+            src="https://www.youtube.com/embed/OZdu_vyPbCQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          {/* <Grid item sm={12} md={6}>
             <Box
               className={classes.box1}
               textAlign="center"
@@ -127,7 +145,7 @@ const Home = () => {
                 <source src="20180120_194059.wav" />
               </audio>
             </Box>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Paper>
     </div>

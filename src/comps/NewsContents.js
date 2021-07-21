@@ -74,6 +74,16 @@ const NewsContents = () => {
     return <h1>Loading...</h1>;
   }
 
+  // delete the data from firestore database
+  function deleteNews(delNews) {
+    ref
+      .doc(delNews.id)
+      .delete()
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   return (
     <div>
       {news.map((item) => (
@@ -99,7 +109,12 @@ const NewsContents = () => {
                 {currentUser ? (
                   <Grid item container direction="column" justify="center">
                     <Grid item>
-                      <Button className={classes.btn}>Edit</Button>
+                      <Button
+                        className={classes.btn}
+                        onClick={() => deleteNews(item)}
+                      >
+                        Edit
+                      </Button>
                       <Button className={classes.btn}>Delete</Button>
                     </Grid>
                     <Grid item>
