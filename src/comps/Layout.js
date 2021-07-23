@@ -11,6 +11,7 @@ import NewPost from "../pages/NewsPost";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import PrivateRoute from "../comps/PrivateRoute";
+import ContactList from "../pages/ContactList";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -44,16 +45,12 @@ function Layout() {
             <Route exact path="/contact">
               <Contact />
             </Route>
-            {/* <PrivateRoute path="/post">
-              <NewPost /> */}
-            <PrivateRoute path="/post" component={NewPost} />
-            {/* </PrivateRoute> */}
+            <Route path="/post" component={NewPost} />
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
+            <Route path="/signup" component={Signup} />
+            <Route path="/contactlist" component={ContactList} />
           </Switch>
         </div>
         <Footer />

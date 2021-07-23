@@ -1,4 +1,4 @@
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, Link, makeStyles } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
@@ -54,11 +54,12 @@ export default function Footer() {
             <p className={classes.title}>La Fontaine...</p>
           </Grid>
           <Grid item>
-            <p className={classes.text}>
-              栃木を中心に活動する合唱団です♪
-              <br />
-              興味がある方はフォローしてね♪
-            </p>
+            <p className={classes.text}>栃木を中心に活動する合唱団です♪</p>
+          </Grid>
+          <Grid item>
+            <Link href="/login" className={classes.text}>
+              団員の方はこちら♪
+            </Link>
           </Grid>
         </Grid>
         <Grid item md={4} container className={classes.items}>

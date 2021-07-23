@@ -1,6 +1,7 @@
 import { Paper, makeStyles, Grid, TextField, Button } from "@material-ui/core";
 import { useState } from "react";
 import { db } from "../service/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -79,6 +80,8 @@ const Contact = () => {
   const [message, setMessage] = useState("");
 
   const [loader, setLoader] = useState(false);
+  let today = new Date();
+  let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
   // const functions = require("firebase-functions");
   // const nodemailer = require("nodemailer");
@@ -91,9 +94,11 @@ const Contact = () => {
 
     db.collection("contacts")
       .add({
+        id: uuidv4(),
         name: name,
         email: email,
         message: message,
+        date: date,
       })
       .then(() => {
         alert("メッセージを受け付けました🥰");

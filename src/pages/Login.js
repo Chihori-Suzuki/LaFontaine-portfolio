@@ -132,6 +132,9 @@ const Login = () => {
               <Button className={classes.loginbtn} href="/news">
                 News Edit
               </Button>
+              <Button className={classes.loginbtn} href="/post">
+                News Post
+              </Button>
             </Grid>
           </Grid>
         ) : null}
