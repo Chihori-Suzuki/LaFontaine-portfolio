@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
+import {} from "react-router-dom";
 
 const useStyle = makeStyles(() => {
   return {
@@ -44,6 +45,7 @@ const NewPost = () => {
   let today = new Date();
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
+  console.log(history);
   async function handleLogout() {
     setError("");
     try {
@@ -102,9 +104,13 @@ const NewPost = () => {
       .catch((err) => {
         console.error(err);
       });
+    history.push("/news");
   }
   // update
-  function editNews(updatedNews) {}
+  function editNews(updatedNews) {
+    console.log(history.location.state.isEdit);
+    history.push("/news");
+  }
 
   return (
     <div>
@@ -125,7 +131,12 @@ const NewPost = () => {
         <Grid item container>
           <TextField
             id="title"
-            value={title}
+            // value={title}
+            defaultValue={
+              history.location.state.isEdit
+                ? history.location.state.item.title
+                : ""
+            }
             fullWidth
             label="title"
             multiline
@@ -138,6 +149,11 @@ const NewPost = () => {
           <TextField
             id="text"
             className={classes.TextField}
+            defaultValue={
+              history.location.state.isEdit
+                ? history.location.state.item.detail
+                : ""
+            }
             fullWidth
             label="text"
             multiline
@@ -172,9 +188,17 @@ const NewPost = () => {
           <Button
             variant="contained"
             className={classes.submitbtn}
-            onClick={() =>
-              addNews({ title, detail, date: date, image: url, id: uuidv4() })
-            }
+            onClick={() => {
+              history.location.state.isEdit
+                ? editNews()
+                : addNews({
+                    title,
+                    detail,
+                    date: date,
+                    image: url,
+                    id: uuidv4(),
+                  });
+            }}
           >
             submit
           </Button>

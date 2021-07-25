@@ -10,6 +10,7 @@ const useStyle = makeStyles(() => {
       display: "flex",
       padding: "5%",
       width: "100%",
+      marginTop: "2%",
       marginBottom: "5%",
     },
     item2: {

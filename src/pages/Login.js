@@ -35,6 +35,9 @@ const useStyle = makeStyles(() => {
       border: "none",
       borderRadius: "4px",
     },
+    link: {
+      textDecoration: "none",
+    },
   };
 });
 const Login = () => {
@@ -115,26 +118,28 @@ const Login = () => {
               <p>☆ 会員専用メニュー ☆</p>
             </Grid>
             <Grid item container direction="row" justify="center">
-              <Button
-                id="signup-btn"
-                className={classes.loginbtn}
-                href="/signup"
+              <Link to="/signup" className={classes.link}>
+                <Button id="signup-btn" className={classes.loginbtn}>
+                  Sign Up
+                </Button>
+              </Link>
+              <Link to="/contactlist" className={classes.link}>
+                <Button id="contactlist-btn" className={classes.loginbtn}>
+                  Contact List
+                </Button>
+              </Link>
+              <Link to="/news" className={classes.link}>
+                <Button className={classes.loginbtn}>News Edit</Button>
+              </Link>
+              <Link
+                to={{
+                  pathname: "/post",
+                  state: { isEdit: false },
+                }}
+                className={classes.link}
               >
-                Sign Up
-              </Button>
-              <Button
-                id="contactlist-btn"
-                className={classes.loginbtn}
-                href="/contactlist"
-              >
-                Contact List
-              </Button>
-              <Button className={classes.loginbtn} href="/news">
-                News Edit
-              </Button>
-              <Button className={classes.loginbtn} href="/post">
-                News Post
-              </Button>
+                <Button className={classes.loginbtn}>News Post</Button>
+              </Link>
             </Grid>
           </Grid>
         ) : null}

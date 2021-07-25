@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const useStyle = makeStyles(() => {
   return {
@@ -30,6 +31,9 @@ const useStyle = makeStyles(() => {
       background: "#FF7193",
       color: "white",
       margin: "3%",
+    },
+    link: {
+      textDecoration: "none",
     },
   };
 });
@@ -110,7 +114,17 @@ const NewsContents = () => {
                 {currentUser ? (
                   <Grid item container direction="column" justify="center">
                     <Grid item>
-                      <Button className={classes.btn}>Edit</Button>
+                      <Link
+                        to={{
+                          pathname: "/post",
+                          state: { isEdit: true, item },
+                        }}
+                        className={classes.link}
+                      >
+                        <Button className={classes.btn} h>
+                          Edit
+                        </Button>
+                      </Link>
                       <Button
                         className={classes.btn}
                         onClick={() => deleteNews(item)}

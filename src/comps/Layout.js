@@ -45,12 +45,12 @@ function Layout() {
             <Route exact path="/contact">
               <Contact />
             </Route>
-            <Route path="/post" component={NewPost} />
+            <PrivateRoute path="/post" component={NewPost} />
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/signup" component={Signup} />
-            <Route path="/contactlist" component={ContactList} />
+            <PrivateRoute path="/signup" component={Signup} />
+            <PrivateRoute path="/contactlist" component={ContactList} />
           </Switch>
         </div>
         <Footer />
