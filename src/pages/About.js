@@ -90,6 +90,9 @@ const useStyle = makeStyles((theme) => {
       fontWeight: "300",
       margin: 0,
     },
+    image2: {
+      marginTop: "15%",
+    },
   };
 });
 const About = () => {
@@ -126,6 +129,7 @@ const About = () => {
             　「本物の、上質な音楽を常に創り続ける場所であること」​　を目指して。～
           </p>
         </Grid>
+
         <li className={classes.items}>
           <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
@@ -163,6 +167,12 @@ const About = () => {
             </p>
           </div>
         </li>
+        <img
+          className={classes.image2}
+          src="aboutbelow.jpg"
+          width="100%"
+          height="auto"
+        />
       </Grid>
     </div>
   );

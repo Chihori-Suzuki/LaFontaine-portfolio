@@ -7,6 +7,7 @@ import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
 import {} from "react-router-dom";
+import Logout from "../comps/Logout";
 
 const useStyle = makeStyles(() => {
   return {
@@ -203,12 +204,8 @@ const NewPost = () => {
             submit
           </Button>
         </Grid>
-        <Grid item>
-          <Button variant="link" onClick={handleLogout}>
-            Log out
-          </Button>
-        </Grid>
       </Grid>
+      <Logout />
     </div>
   );
 };

@@ -45,11 +45,9 @@ const Login = () => {
   const topTitle = "Login";
   const emailRef = useRef();
   const passRef = useRef();
-  const { login } = useAuth();
+  const { currentUser, login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
-  const [showMenu, setShowMenu] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -59,7 +57,6 @@ const Login = () => {
       setLoading(true);
       await login(emailRef.current.value, passRef.current.value);
       // history.push("/post");
-      setShowMenu(true);
     } catch {
       setError("Failed to sign in");
     }
@@ -101,7 +98,7 @@ const Login = () => {
             inputRef={passRef}
           />
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <button
             id="login-btn"
             className={classes.loginbtn}
@@ -112,7 +109,7 @@ const Login = () => {
           </button>
         </Grid>
 
-        {showMenu ? (
+        {currentUser ? (
           <Grid item id="menu" container justify="center">
             <Grid item>
               <p>☆ 会員専用メニュー ☆</p>

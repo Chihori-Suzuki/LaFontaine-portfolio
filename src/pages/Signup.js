@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import Logout from "../comps/Logout";
 
 const useStyle = makeStyles(() => {
   return {
@@ -69,67 +70,66 @@ const Signup = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid
-        container
-        className={classes.grid}
-        direction="column"
-        alignItems="center"
-        spacing={3}
-      >
-        <Grid item>
-          <h1 className={classes.topTitle}>{topTitle}</h1>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <Grid
+          container
+          className={classes.grid}
+          direction="column"
+          alignItems="center"
+          spacing={3}
+        >
+          <Grid item>
+            <h1 className={classes.topTitle}>{topTitle}</h1>
+          </Grid>
+          <Grid item>{error && <Alert severity="error">{error}</Alert>}</Grid>
+          <Grid item container>
+            <TextField
+              id="email"
+              type="email"
+              label="email"
+              required
+              fullWidth
+              variant="outlined"
+              inputRef={emailRef}
+            />
+          </Grid>
+          <Grid item container>
+            <TextField
+              id="password"
+              type="password"
+              label="password"
+              fullWidth
+              variant="outlined"
+              required
+              inputRef={passRef}
+            />
+          </Grid>
+          <Grid item container>
+            <TextField
+              id="password-confirm"
+              type="password"
+              label="password confirm"
+              fullWidth
+              variant="outlined"
+              required
+              inputRef={passComfRef}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              disabled={loading}
+              variant="contained"
+              type="submit"
+              className={classes.loginbtn}
+            >
+              Sign up
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>{error && <Alert severity="error">{error}</Alert>}</Grid>
-        <Grid item container>
-          <TextField
-            id="email"
-            type="email"
-            label="email"
-            required
-            fullWidth
-            variant="outlined"
-            inputRef={emailRef}
-          />
-        </Grid>
-        <Grid item container>
-          <TextField
-            id="password"
-            type="password"
-            label="password"
-            fullWidth
-            variant="outlined"
-            required
-            inputRef={passRef}
-          />
-        </Grid>
-        <Grid item container>
-          <TextField
-            id="password-confirm"
-            type="password"
-            label="password confirm"
-            fullWidth
-            variant="outlined"
-            required
-            inputRef={passComfRef}
-          />
-        </Grid>
-        <Grid item>
-          <Button
-            disabled={loading}
-            variant="contained"
-            type="submit"
-            className={classes.loginbtn}
-          >
-            Sign up
-          </Button>
-        </Grid>
-        <Grid item>
-          <p>Already have a account?</p>
-          <Link to="/login">Login</Link>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+      <Logout />
+    </div>
   );
 };
 

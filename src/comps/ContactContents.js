@@ -37,6 +37,16 @@ const ContactContents = () => {
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
+
+      items.sort(function (a, b) {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
+      });
       setContacts(items);
       setLoading(false);
     });

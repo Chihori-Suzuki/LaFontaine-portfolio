@@ -3,16 +3,12 @@ import { Box, Grid, makeStyles, Paper } from "@material-ui/core";
 const useStyle = makeStyles(() => {
   return {
     topPaper: {
-      backgroundImage: `url("/topImage.jpg")`,
-      backgroundSize: "auto 100%",
-      width: "100vw",
-      height: "75vh",
       display: "block",
       position: "relative",
-      // verticalAlign: "bottom",
     },
-    topContainer: {
-      textAlign: "center",
+    image: {
+      width: "100%",
+      height: "100%",
     },
     topTitle: {
       fontFamily: "Ruthie",
@@ -101,7 +97,8 @@ const Home = () => {
   const topTitle = "La Fontaine...";
   return (
     <div className="home">
-      <Paper className={classes.topPaper}>
+      <Paper className={classes.topPaper} elevation={0}>
+        <img className={classes.image} src="topImage.jpg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
         <h2 className={classes.subtitle}>
           Ladies singers in Utsunomiya & Tokyo
@@ -118,34 +115,6 @@ const Home = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
-          {/* <Grid item sm={12} md={6}>
-            <Box
-              className={classes.box1}
-              textAlign="center"
-              justifyContent="center"
-            >
-              <h2 className={classes.paraTitle}>Title - subtitle</h2>
-              <p className={classes.paragraph}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero
-                tempora sunt, inventore magnam et quam nihil cum, saepe fuga ut
-                soluta? Earum, veniam incidunt! Atque vitae facere eius rerum
-                molestias?
-              </p>
-            </Box>
-          </Grid>
-
-          <Grid item sm={12} md={6}>
-            <Box
-              className={classes.box}
-              textAlign="center"
-              justifyContent="center"
-            >
-              <img src="cd.jpg" width="50%" height="50%"></img>
-              <audio controls>
-                <source src="20180120_194059.wav" />
-              </audio>
-            </Box>
-          </Grid> */}
         </Grid>
       </Paper>
     </div>

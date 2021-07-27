@@ -1,5 +1,8 @@
-import { Paper, makeStyles, Grid, Box } from "@material-ui/core";
+import { Paper, makeStyles, Grid, Button } from "@material-ui/core";
 import NewsContents from "../comps/NewsContents";
+import { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -39,6 +42,13 @@ const useStyle = makeStyles((theme) => {
         paddingLeft: "25%",
         paddingRight: "25%",
       },
+      btn: {
+        background: "#FF7193",
+        color: "white",
+      },
+      link: {
+        textDecoration: "none",
+      },
     },
   };
 });
@@ -46,13 +56,31 @@ const useStyle = makeStyles((theme) => {
 const News = () => {
   const classes = useStyle();
   const topTitle = "News";
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
+
+  async function handleLogout() {
+    setError("");
+    try {
+      await logout();
+      history.push("/login");
+    } catch {
+      setError("Failed to log out");
+    }
+  }
   return (
     <div className="news">
       <Paper className={classes.topPaper} elevation={0}>
         <img className={classes.image} src="News.jpg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>
-      <Grid container className={classes.grid}>
+      <Grid
+        container
+        className={classes.grid}
+        direction="column"
+        alignItems="center"
+      >
         <NewsContents />
       </Grid>
     </div>

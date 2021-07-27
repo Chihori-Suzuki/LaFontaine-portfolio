@@ -2,8 +2,7 @@ import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import Logout from "../comps/Logout";
 
 const useStyle = makeStyles(() => {
   return {
@@ -42,22 +41,9 @@ const NewsContents = () => {
 
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
-  const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
-  const history = useHistory();
+  const { currentUser } = useAuth();
 
   const ref = firebase.firestore().collection("news");
-
-  async function handleLogout() {
-    setError("");
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
 
   function getNews() {
     setLoading(true);
@@ -65,6 +51,16 @@ const NewsContents = () => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
+      });
+
+      items.sort(function (a, b) {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
       });
       setNews(items);
       setLoading(false);
@@ -111,39 +107,13 @@ const NewsContents = () => {
                 <Grid item>
                   <p>{item.detail}</p>
                 </Grid>
-                {currentUser ? (
-                  <Grid item container direction="column" justify="center">
-                    <Grid item>
-                      <Link
-                        to={{
-                          pathname: "/post",
-                          state: { isEdit: true, item },
-                        }}
-                        className={classes.link}
-                      >
-                        <Button className={classes.btn} h>
-                          Edit
-                        </Button>
-                      </Link>
-                      <Button
-                        className={classes.btn}
-                        onClick={() => deleteNews(item)}
-                      >
-                        Delete
-                      </Button>
-                    </Grid>
-                    <Grid item>
-                      <Button variant="link" onClick={handleLogout}>
-                        Log out
-                      </Button>
-                    </Grid>
-                  </Grid>
-                ) : null}
               </Grid>
             </Grid>
           </Paper>
         </div>
       ))}
+
+      <Logout />
     </div>
   );
 };
