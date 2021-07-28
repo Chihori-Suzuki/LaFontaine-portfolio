@@ -1,6 +1,6 @@
 import { Box, Grid, makeStyles, Paper } from "@material-ui/core";
 
-const useStyle = makeStyles(() => {
+const useStyle = makeStyles((theme) => {
   return {
     topPaper: {
       display: "block",
@@ -14,26 +14,57 @@ const useStyle = makeStyles(() => {
       fontFamily: "Ruthie",
       position: "absolute",
       color: "white",
-
       top: "50%",
       left: "50%",
-
       transform: "translate(-50%,-50%)",
       margin: 0,
       padding: 0,
 
-      fontSize: "120px",
-      fontWeight: "300",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "50px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "80px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "120px",
+        fontWeight: "300",
+      },
     },
     subtitle: {
       position: "absolute",
       color: "white",
-      letterSpacing: "0.25em",
-      fontSize: "25px",
-      fontWeight: "500",
-      top: "60%",
-      left: "50%",
 
+      [theme.breakpoints.down("xs")]: {
+        letterSpacing: "0.25em",
+        top: "70%",
+        left: "50%",
+        fontSize: "16px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.down("sm")]: {
+        letterSpacing: "0.25em",
+        top: "65%",
+        left: "50%",
+        fontSize: "16px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("md")]: {
+        letterSpacing: "0.25em",
+        top: "60%",
+        left: "50%",
+        fontSize: "23px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("lg")]: {
+        letterSpacing: "0.25em",
+        top: "60%",
+        left: "50%",
+        fontSize: "25px",
+        fontWeight: "500",
+      },
       transform: "translate(-50%,-50%)",
     },
 

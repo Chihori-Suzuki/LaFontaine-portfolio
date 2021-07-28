@@ -22,8 +22,18 @@ const useStyle = makeStyles((theme) => {
       margin: 0,
       padding: 0,
 
-      fontSize: "100px",
-      fontWeight: "700",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "60px",
+        fontWeight: "500",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "70px",
+        fontWeight: "600",
+      },
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "100px",
+        fontWeight: "700",
+      },
     },
     grid: {
       textAlign: "center",
@@ -48,8 +58,20 @@ const useStyle = makeStyles((theme) => {
       fontSize: "102px",
       color: "#FF81A6",
       fontWeight: "500",
-    },
 
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "50px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "80px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "102px",
+        fontWeight: "300",
+      },
+    },
     paragraph: {
       maxWidth: "100vw",
       overflowWrap: "break-word",
@@ -59,11 +81,9 @@ const useStyle = makeStyles((theme) => {
       marginBottom: "10%",
     },
     items: {
-      // overflow: "hidden",
       listStyle: "none",
       minWidth: "100%",
       position: "relative",
-      // paddingBottom: "10%",
       marginBottom: "10%",
     },
     icon: {

@@ -22,8 +22,19 @@ const useStyle = makeStyles((theme) => {
       transform: "translate(-50%,-50%)",
       margin: 0,
       padding: 0,
-      fontSize: "120px",
-      fontWeight: "300",
+
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "60px",
+        fontWeight: "500",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "70px",
+        fontWeight: "600",
+      },
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "100px",
+        fontWeight: "700",
+      },
     },
     grid: {
       paddingTop: "8%",
