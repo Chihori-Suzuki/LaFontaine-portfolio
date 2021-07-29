@@ -70,9 +70,19 @@ const useStyle = makeStyles((theme) => {
 
     title: {
       fontFamily: "Dancing Script",
-      fontSize: "60px",
-      fontWeight: "700",
       textAlign: "center",
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "40px",
+        fontWeight: "500",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "50px",
+        fontWeight: "600",
+      },
+      [theme.breakpoints.up("lg")]: {
+        fontSize: "60px",
+        fontWeight: "700",
+      },
     },
     paper: {
       background: "#FFF",

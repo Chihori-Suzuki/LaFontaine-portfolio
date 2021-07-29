@@ -1,10 +1,4 @@
-import {
-  AppBar,
-  Container,
-  makeStyles,
-  Paper,
-  Toolbar,
-} from "@material-ui/core";
+import { AppBar, makeStyles, Toolbar } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,56 +10,51 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "48px",
     fontWeight: "300",
     textDecoration: "none",
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "35px",
+      fontWeight: "500",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "40px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "48px",
+    },
   },
   link: {
     color: "#FF81A6",
     marginRight: theme.spacing(5),
     fontFamily: "montserrat",
-    fontSize: "24px",
     fontWeight: "thin",
     letterSpacing: "0.1rem",
     textDecoration: "none",
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "16px",
+      fontWeight: "500",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "20px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "24px",
+    },
   },
   appbar: {
     background: "#FFFFFF",
     position: "fixed",
   },
   toolbar: {
-    minHeight: 110,
-  },
-  image: {
-    backgroundSize: "100px 100%",
-    width: "100vw",
-    position: "fixed",
-    // verticalAlign: "bottom",
-  },
-  topContainer: {
-    textAlign: "center",
-  },
-  title: {
-    fontFamily: "Ruthie",
-    position: "absolute",
-    color: "white",
-
-    // height: "70%",
-    top: "16%",
-    // left: "40%",
-    // top: "50%",
-    left: "50%",
-
-    transform: "translate(-50%,-50%)",
-
-    fontSize: "120px",
-    fontWeight: "300",
-  },
-  subtitle: {
-    position: "absolute",
-    color: "white",
-    top: "28%",
-    left: "30%",
-    letterSpacing: "0.3em",
-    fontSize: "25px",
-    fontWeight: "400",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 70,
+    },
+    [theme.breakpoints.up("md")]: {
+      minHeight: 90,
+    },
+    [theme.breakpoints.up("lg")]: {
+      minHeight: 110,
+    },
   },
 }));
 
