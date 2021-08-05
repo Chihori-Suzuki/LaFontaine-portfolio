@@ -62,6 +62,8 @@ const NewsContents = () => {
         }
         return 0;
       });
+      console.log(items);
+      // items.detail.replaceAll("\\n", "\n");
       setNews(items);
       setLoading(false);
     });
@@ -107,6 +109,27 @@ const NewsContents = () => {
                 <Grid item>
                   <p>{item.detail}</p>
                 </Grid>
+                {currentUser ? (
+                  <Grid item container direction="column" justify="center">
+                    <Grid item>
+                      <Link
+                        to={{
+                          pathname: "/post",
+                          state: { isEdit: true, item },
+                        }}
+                        className={classes.link}
+                      >
+                        <Button className={classes.btn}>Edit</Button>
+                      </Link>
+                      <Button
+                        className={classes.btn}
+                        onClick={() => deleteNews(item)}
+                      >
+                        Delete
+                      </Button>
+                    </Grid>
+                  </Grid>
+                ) : null}
               </Grid>
             </Grid>
           </Paper>
