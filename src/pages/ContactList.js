@@ -1,9 +1,9 @@
-import { Grid, makeStyles, Button } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import ContactContents from "../comps/ContactContents";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import Logout from "../comps/Logout";
 

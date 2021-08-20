@@ -1,8 +1,9 @@
-import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
+import { Button, Grid, makeStyles, Paper } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import Logout from "../comps/Logout";
+import { Link } from "react-router-dom";
 
 const useStyle = makeStyles(() => {
   return {

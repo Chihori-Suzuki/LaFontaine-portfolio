@@ -1,5 +1,5 @@
 import { Button, Grid, makeStyles, TextField } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";

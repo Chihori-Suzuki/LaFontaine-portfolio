@@ -2,7 +2,7 @@ import { Grid, makeStyles, Paper } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 
 const useStyle = makeStyles(() => {
   return {
@@ -25,8 +25,8 @@ const ContactContents = () => {
 
   const [contact, setContacts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const history = useHistory();
+  // const [error, setError] = useState("");
+  // const history = useHistory();
 
   const ref = firebase.firestore().collection("contacts");
 

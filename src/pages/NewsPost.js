@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
-import {} from "react-router-dom";
+// import {} from "react-router-dom";
 import Logout from "../comps/Logout";
 
 const useStyle = makeStyles(() => {
@@ -47,15 +47,15 @@ const NewPost = () => {
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
   console.log(history);
-  async function handleLogout() {
-    setError("");
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
+  // async function handleLogout() {
+  //   setError("");
+  //   try {
+  //     await logout();
+  //     history.push("/login");
+  //   } catch {
+  //     setError("Failed to log out");
+  //   }
+  // }
 
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
@@ -109,7 +109,12 @@ const NewPost = () => {
   }
   // update
   function editNews(updatedNews) {
-    console.log(history.location.state.isEdit);
+    ref
+      .doc(updatedNews.id)
+      .update(updatedNews)
+      .catch((err) => {
+        console.error(err);
+      })
     history.push("/news");
   }
 
@@ -191,7 +196,7 @@ const NewPost = () => {
             className={classes.submitbtn}
             onClick={() => {
               history.location.state.isEdit
-                ? editNews()
+                ? editNews({ title, detail, date, image: url, id: uuidv4(),})
                 : addNews({
                     title,
                     detail,

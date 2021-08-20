@@ -1,6 +1,6 @@
-import { Paper, makeStyles, Grid, Button } from "@material-ui/core";
+import { Paper, makeStyles, Grid } from "@material-ui/core";
 import NewsContents from "../comps/NewsContents";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
 

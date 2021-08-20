@@ -1,9 +1,9 @@
 import { Button, Grid, makeStyles, TextField } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
-import { Alert, AlertTitle } from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 import Logout from "../comps/Logout";
 
 const useStyle = makeStyles(() => {
