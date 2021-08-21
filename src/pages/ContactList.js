@@ -39,7 +39,7 @@ const useStyle = makeStyles((theme) => {
 
 export default function ContactList() {
   const classes = useStyle();
-  const [error, setError] = useState("");
+  const [ error, setError ] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
 

@@ -67,19 +67,18 @@ const useStyle = makeStyles((theme) => {
 const News = () => {
   const classes = useStyle();
   const topTitle = "News";
-  const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
 
-  async function handleLogout() {
-    setError("");
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
+  // async function handleLogout() {
+  //   setError("");
+  //   try {
+  //     await logout();
+  //     history.push("/login");
+  //   } catch {
+  //     setError("Failed to log out");
+  //   }
+  // }
   return (
     <div className="news">
       <Paper className={classes.topPaper} elevation={0}>

@@ -63,8 +63,6 @@ const NewsContents = () => {
         }
         return 0;
       });
-      console.log(items);
-      // items.detail.replaceAll("\\n", "\n");
       setNews(items);
       setLoading(false);
     });
@@ -108,7 +106,9 @@ const NewsContents = () => {
                   <p>{item.date}</p>
                 </Grid>
                 <Grid item>
-                  <p>{item.detail}</p>
+                  <div style={{whiteSpace: 'pre-line'}}>
+                    <p>{item.detail}</p>
+                  </div>
                 </Grid>
                 {currentUser ? (
                   <Grid item container direction="column" justify="center">

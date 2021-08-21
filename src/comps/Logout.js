@@ -28,7 +28,7 @@ const Logout = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  console.log(history);
+  // console.log(history);
   async function handleLogout() {
     setError("");
     try {

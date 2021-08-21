@@ -6,7 +6,6 @@ import { useHistory } from "react-router";
 import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
-// import {} from "react-router-dom";
 import Logout from "../comps/Logout";
 
 const useStyle = makeStyles(() => {
@@ -41,24 +40,13 @@ const NewPost = () => {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
-  const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
+  const [title, setTitle] = useState(history.location.state.item.title);
+  const [detail, setDetail] = useState(history.location.state.item.detail);
   let today = new Date();
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
-  console.log(history);
-  // async function handleLogout() {
-  //   setError("");
-  //   try {
-  //     await logout();
-  //     history.push("/login");
-  //   } catch {
-  //     setError("Failed to log out");
-  //   }
-  // }
-
   const [image, setImage] = useState(null);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(history.location.state.item.image);
   const [progress, setProgress] = useState(0);
 
   const ref = firebase.firestore().collection("news");
@@ -90,7 +78,6 @@ const NewPost = () => {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
             setUrl(url);
           });
       }
@@ -196,7 +183,13 @@ const NewPost = () => {
             className={classes.submitbtn}
             onClick={() => {
               history.location.state.isEdit
-                ? editNews({ title, detail, date, image: url, id: uuidv4(),})
+                ? editNews({ 
+                    title, 
+                    detail, 
+                    date: history.location.state.item.date, 
+                    image: url, 
+                    id: history.location.state.item.id,
+                  })
                 : addNews({
                     title,
                     detail,
