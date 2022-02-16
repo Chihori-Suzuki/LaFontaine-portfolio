@@ -3,7 +3,6 @@ import React from "react";
 import ContactContents from "../comps/ContactContents";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-// import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import Logout from "../comps/Logout";
 
