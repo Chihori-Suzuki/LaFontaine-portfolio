@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Paper } from "@material-ui/core";
+import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import Brightness1Icon from "@material-ui/icons/Brightness1";
 import { useTranslation } from "react-i18next";
 
@@ -139,34 +139,42 @@ const About = () => {
           <h1 className={classes.logo}>La Fontaine...</h1>
         </Grid>
         <Grid item>
-          <p className={classes.paragraph}>{t("about.intro")}</p>
+          <Typography variant="body1" className={classes.paragraph}>
+            {t("about.intro")}
+          </Typography>
         </Grid>
 
         <li className={classes.items}>
           <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
-            <p className={classes.paragraph2}>{t("about.history1")}</p>
+            <Typography variant="body2" className={classes.paragraph2}>
+              {t("about.history1")}
+            </Typography>
           </div>
         </li>
         <li className={classes.items}>
           <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
-            <p className={classes.paragraph2}>{t("about.history2")}</p>
+            <Typography variant="body2" className={classes.paragraph2}>
+              {t("about.history2")}
+            </Typography>
           </div>
         </li>
         <li className={classes.items}>
           <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
-            <p className={classes.paragraph2}>{t("about.history3")}</p>
+            <Typography variant="body2" className={classes.paragraph2}>
+              {t("about.history3")}
+            </Typography>
           </div>
         </li>
         <li className={classes.items}>
           <Brightness1Icon className={classes.icon} />
           <div className={classes.timelineContent}>
-            <p className={classes.paragraph2}>
+            <Typography variant="body2" className={classes.paragraph2}>
               {t("about.history4")}
               <br />
-            </p>
+            </Typography>
           </div>
         </li>
         <img

@@ -1,7 +1,14 @@
-import { Paper, makeStyles, Grid, TextField } from "@material-ui/core";
+import {
+  Paper,
+  makeStyles,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { useState } from "react";
 import { db } from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -58,11 +65,12 @@ const useStyle = makeStyles((theme) => {
     paragraph: {
       maxWidth: "100vw",
       overflowWrap: "break-word",
-      textAlign: "left",
+      textAlign: "center",
       fontSize: "18px",
       fontWeight: "300",
       marginBottom: "10%",
       lineHeight: "1.5em",
+      whiteSpace: "pre-wrap",
     },
     flex: {
       flexGrow: 1,
@@ -86,6 +94,7 @@ const useStyle = makeStyles((theme) => {
 const Contact = () => {
   const classes = useStyle();
   const topTitle = "Contact";
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -93,11 +102,6 @@ const Contact = () => {
   const [loader, setLoader] = useState(false);
   let today = new Date();
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
-
-  // const functions = require("firebase-functions");
-  // const nodemailer = require("nodemailer");
-
-  // const cors = require("cors")({ origin: true });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -135,18 +139,14 @@ const Contact = () => {
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" className={classes.grid}>
           <Grid item>
-            <h3>お問い合わせ</h3>
+            <Typography variant="h5" style={{ marginBottom: 20 }}>
+              {t("contact.title")}
+            </Typography>
           </Grid>
           <Grid item>
-            <p className={classes.paragraph}>
-              ご質問等ございましたら、こちらにお願いします。
-              <br />
-              <br />
-              また、La Fontaineは新規団員を募集中です。
-              もし興味を持っていただけた方がいらっしゃいましたら、お気軽にお問い合わせください。
-              <br />
-              私たちと同じような想いで、「合唱がしたい！」と思ってくださる方の入団を、心よりお待ちしております♪
-            </p>
+            <Typography variant="body1" className={classes.paragraph}>
+              {t("contact.body")}
+            </Typography>
           </Grid>
           <Grid item container spacing={2}>
             <Grid item sm={12} md={6}>
