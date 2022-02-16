@@ -1,6 +1,15 @@
 {
   "footer": {
-    "greeting": "Thank you for visiting our web site♪\nWe are chorus group in Tochigi♪",
-    "login": "If you are a member, click here"
+    "greeting1": "Thank you for visiting our web site♪",
+    "greeting2": "We are chorus group in Tochigi♪",
+    "login": "If you are a member, click here",
+    "sns": "Please, follow me♪"
+  },
+  "about": {
+    "intro": "Fontaine means `spring` in French.\nWater is the source of life, and a spring is where water overflows.\n\nWe chose this name because We want to share happiness and spirit of enjoying music.\nFor the reason that we put '...' is with the idea of permanence. \n\nWe hope that our group will continue this troupe for a long time to come and that it will never be complete. \n\nTo be a warm place like home for everyone. Our goal is to be a place where we can continue to create  high quality music.",
+    "history1": "We were founded in December 2016.\nStarted working mainly in Tochigi.",
+    "history2": "October 2017 \nThe first concert was held in Niigata Prefecture.\nOpened activities.",
+    "history3": "The first regular concert series was held in February 2018.",
+    "history4": "As of 2022, we are working towards even higher goals."
   }
 }

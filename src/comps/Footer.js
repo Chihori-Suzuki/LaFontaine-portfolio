@@ -15,7 +15,6 @@ import {
   Email as EmailIcon,
 } from "@material-ui/icons";
 
-// import i18n from "../contexts/i18n";
 import { useTranslation } from "react-i18next";
 
 const useStyle = makeStyles((theme) => {
@@ -124,7 +123,7 @@ export default function Footer() {
           md={4}
         >
           <Typography variant="subtitle1" className={classes.text}>
-            フォローお願いします♪
+            {t("footer.sns")}
           </Typography>
           <IconButton
             href="https://www.instagram.com/lafontaine.chorus/"
