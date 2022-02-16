@@ -1,8 +1,22 @@
-import { Grid, Link, makeStyles } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import EmailIcon from "@material-ui/icons/Email";
+import { useState, useEffect } from "react";
+
+import {
+  Grid,
+  Link,
+  makeStyles,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
+import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
+import {} from "@material-ui/core";
+import {
+  Instagram as InstagramIcon,
+  Facebook as FacebookIcon,
+  Email as EmailIcon,
+} from "@material-ui/icons";
+
+// import i18n from "../contexts/i18n";
+import { useTranslation } from "react-i18next";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -23,30 +37,37 @@ const useStyle = makeStyles((theme) => {
       fontWeight: "400",
       fontSize: 15,
       textAlign: "center",
-      // margin: 0,
     },
     grid: {
       paddingTop: "3%",
       paddingBottom: "3%",
-      paddingLeft: "20%",
-      paddingRight: "20%",
+      paddingLeft: "10%",
+      paddingRight: "10%",
     },
     items: {
       display: "flex",
       justifyContent: "center",
-      marginLeft: 0,
       alignItems: "center",
     },
     icon: {
       color: "#FF81A6",
       fontSize: 25,
-      // marginLeft: "10px",
-      // marginRight: "10px",
+    },
+    toggle: {
+      color: "#FF81A6",
+      border: "1px solid #FF81A6",
     },
   };
 });
 export default function Footer() {
   const classes = useStyle();
+  const [lang, setLang] = useState("jp");
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang, i18n]);
+
   return (
     <footer className={classes.footer}>
       <Grid container className={classes.grid} justify="center">
@@ -60,31 +81,60 @@ export default function Footer() {
           sm={6}
         >
           <p className={classes.title}>La Fontaine...</p>
-          <p className={classes.text}>
-            お立ち寄りいただきありがとうございます♪
-            <br />
-            栃木を中心に活動する合唱団です♪
-          </p>
+          <Typography variant="subtitle2" className={classes.text}>
+            {t("footer.greeting1")}
+          </Typography>
+          <Typography variant="subtitle2" className={classes.text} gutterBottom>
+            {t("footer.greeting2")}
+          </Typography>
           <Link href="/login" className={classes.text}>
-            団員の方はこちら♪
+            {t("footer.login")}
           </Link>
+
+          <ToggleButtonGroup
+            value={lang}
+            exclusive
+            onChange={() => setLang(lang === "en" ? "jp" : "en")}
+            aria-label="text alignment"
+            style={{ marginTop: "5%" }}
+          >
+            <ToggleButton
+              value="left"
+              aria-label="left aligned"
+              className={classes.toggle}
+            >
+              Japanese
+            </ToggleButton>
+            <ToggleButton
+              value="left"
+              aria-label="left aligned"
+              className={classes.toggle}
+            >
+              English
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Grid>
         <Grid
           item
-          md={4}
           container
           className={classes.items}
           direction="column"
           xs={12}
           sm={6}
+          md={4}
         >
+          <Typography variant="subtitle1" className={classes.text}>
+            フォローお願いします♪
+          </Typography>
           <IconButton
             href="https://www.instagram.com/lafontaine.chorus/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <InstagramIcon className={classes.icon} />
-            <p className={classes.text}>Instagram</p>
+            <Typography variant="body2" className={classes.text}>
+              Instagram
+            </Typography>
           </IconButton>
           <IconButton
             href="https://www.facebook.com/profile.php?id=100023634976751"
@@ -92,14 +142,18 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <FacebookIcon className={classes.icon} />
-            <p className={classes.text}>Facebook</p>
+            <Typography variant="body2" className={classes.text}>
+              Facebook
+            </Typography>
           </IconButton>
           <IconButton
             href="mailto:lafontaine.chorussong@gmail.com"
             target="_top"
           >
             <EmailIcon className={classes.icon} />
-            <p className={classes.text}>mail</p>
+            <Typography variant="body2" className={classes.text}>
+              mail
+            </Typography>
           </IconButton>
         </Grid>
       </Grid>

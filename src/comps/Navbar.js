@@ -1,4 +1,5 @@
-import { AppBar, makeStyles, Toolbar } from "@material-ui/core";
+import { AppBar, Button, makeStyles, Toolbar } from "@material-ui/core";
+
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,10 +57,18 @@ const useStyles = makeStyles((theme) => ({
       minHeight: 110,
     },
   },
+  languageBtn: {
+    color: "white",
+    fontSize: "16px",
+    background: "#FF81A6",
+    border: "none",
+    borderRadius: "4px",
+  },
 }));
 
 const Navbar = () => {
   const classes = useStyles();
+
   return (
     <div>
       <AppBar position="static" className={classes.appbar}>
