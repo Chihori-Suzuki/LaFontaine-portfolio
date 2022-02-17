@@ -1,11 +1,17 @@
-import { Button, Grid, makeStyles, TextField } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
 
-const useStyle = makeStyles(() => {
+const useStyle = makeStyles((theme) => {
   return {
     topTitle: {
       fontFamily: "Dancing Script",
@@ -18,10 +24,12 @@ const useStyle = makeStyles(() => {
     },
     grid: {
       textAlign: "center",
-      paddingTop: "5%",
-      paddingBottom: "5%",
-      paddingLeft: "30%",
-      paddingRight: "30%",
+      [theme.breakpoints.down("sm")]: {
+        padding: "5% 8%",
+      },
+      [theme.breakpoints.up("md")]: {
+        padding: "5% 20%",
+      },
     },
     loginbtn: {
       color: "white",
@@ -34,9 +42,18 @@ const useStyle = makeStyles(() => {
       paddingBottom: "2%",
       border: "none",
       borderRadius: "4px",
+      textTransform: "none",
+    },
+    menuItems: {
+      "&:hover": {
+        backgroundColor: "#FFCFDB",
+      },
     },
     link: {
       textDecoration: "none",
+      fontSize: 24,
+      color: "#FF7193",
+      // padding: 10,
     },
   };
 });
@@ -49,7 +66,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -61,7 +78,7 @@ const Login = () => {
       setError("Failed to sign in");
     }
     setLoading(false);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -99,44 +116,50 @@ const Login = () => {
           />
         </Grid>
         <Grid item container justifyContent="center">
-          <button
+          <Button
             id="login-btn"
             className={classes.loginbtn}
             disabled={loading}
             type="submit"
           >
             Login
-          </button>
+          </Button>
         </Grid>
 
         {currentUser ? (
-          <Grid item id="menu" container justify="center">
+          <Grid item id="menu" container justify="center" spacing={2}>
             <Grid item>
-              <p>☆ 会員専用メニュー ☆</p>
+              <Typography variant="subtitle1" gutterBottom>
+                ☆ 会員専用メニュー ☆
+              </Typography>
             </Grid>
-            <Grid item container direction="row" justify="center">
-              <Link to="/signup" className={classes.link}>
-                <Button id="signup-btn" className={classes.loginbtn}>
+            <Grid item container direction="row" justify="center" spacing={3}>
+              <Grid item xs={12} sm={4} md={3} className={classes.menuItems}>
+                <Link to="/signup" className={classes.link}>
                   Sign Up
-                </Button>
-              </Link>
-              <Link to="/contactlist" className={classes.link}>
-                <Button id="contactlist-btn" className={classes.loginbtn}>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={4} md={3} className={classes.menuItems}>
+                <Link to="/contactlist" className={classes.link}>
                   Contact List
-                </Button>
-              </Link>
-              <Link to="/news" className={classes.link}>
-                <Button className={classes.loginbtn}>News Edit</Button>
-              </Link>
-              <Link
-                to={{
-                  pathname: "/post",
-                  state: { isEdit: false },
-                }}
-                className={classes.link}
-              >
-                <Button className={classes.loginbtn}>News Post</Button>
-              </Link>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={4} md={3} className={classes.menuItems}>
+                <Link to="/news" className={classes.link}>
+                  News Edit
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={4} md={3} className={classes.menuItems}>
+                <Link
+                  to={{
+                    pathname: "/post",
+                    state: { isEdit: false },
+                  }}
+                  className={classes.link}
+                >
+                  News Post
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         ) : null}

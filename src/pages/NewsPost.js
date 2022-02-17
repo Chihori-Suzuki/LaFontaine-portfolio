@@ -52,7 +52,6 @@ const NewPost = () => {
   const ref = firebase.firestore().collection("news");
 
   const handleChange = (e) => {
-    console.log(e);
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }

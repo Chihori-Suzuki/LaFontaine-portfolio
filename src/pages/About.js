@@ -125,7 +125,7 @@ const About = () => {
   return (
     <div className="about">
       <Paper className={classes.topPaper} elevation={0}>
-        <img className={classes.image} src="about.jpg"></img>
+        <img className={classes.image} src="about.jpg" alt="aboutImg"></img>
         <h1 className={classes.topTitle}>{topTitle}</h1>
       </Paper>
       <Grid

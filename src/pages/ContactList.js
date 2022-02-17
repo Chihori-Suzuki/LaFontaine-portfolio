@@ -1,9 +1,9 @@
 import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import ContactContents from "../comps/ContactContents";
-import { useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import { useHistory } from "react-router";
+// import { useState } from "react";
+// import { useAuth } from "../contexts/AuthContext";
+// import { useHistory } from "react-router";
 import Logout from "../comps/Logout";
 
 const useStyle = makeStyles((theme) => {
@@ -38,19 +38,19 @@ const useStyle = makeStyles((theme) => {
 
 export default function ContactList() {
   const classes = useStyle();
-  const [ error, setError ] = useState("");
-  const { currentUser, logout } = useAuth();
-  const history = useHistory();
+  // const [ error, setError ] = useState("");
+  // const { currentUser, logout } = useAuth();
+  // const history = useHistory();
 
-  async function handleLogout() {
-    setError("");
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
+  // async function handleLogout() {
+  //   setError("");
+  //   try {
+  //     await logout();
+  //     history.push("/login");
+  //   } catch {
+  //     setError("Failed to log out");
+  //   }
+  // }
   return (
     <Grid
       container

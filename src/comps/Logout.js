@@ -21,6 +21,11 @@ const useStyle = makeStyles(() => {
     link: {
       textDecoration: "none",
     },
+    logoutBtn: {
+      "&:hover": {
+        backgroundColor: "#AFAFAF",
+      },
+    },
   };
 });
 const Logout = () => {
@@ -28,7 +33,6 @@ const Logout = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  // console.log(history);
   async function handleLogout() {
     setError("");
     try {
@@ -45,7 +49,11 @@ const Logout = () => {
       {currentUser ? (
         <Grid container direction="column" className={classes.grid} spacing={2}>
           <Grid item container justifyContent="center">
-            <Button variant="link" onClick={handleLogout}>
+            <Button
+              variant="link"
+              onClick={handleLogout}
+              className={classes.logoutBtn}
+            >
               Log out
             </Button>
           </Grid>

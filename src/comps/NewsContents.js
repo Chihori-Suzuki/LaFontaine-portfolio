@@ -31,6 +31,7 @@ const useStyle = makeStyles(() => {
       background: "#FF7193",
       color: "white",
       margin: "3%",
+      textTransform: "none",
     },
     link: {
       textDecoration: "none",
@@ -106,7 +107,7 @@ const NewsContents = () => {
                   <p>{item.date}</p>
                 </Grid>
                 <Grid item>
-                  <div style={{whiteSpace: 'pre-line'}}>
+                  <div style={{ whiteSpace: "pre-line" }}>
                     <p>{item.detail}</p>
                   </div>
                 </Grid>

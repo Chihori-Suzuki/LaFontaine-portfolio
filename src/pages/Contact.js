@@ -4,6 +4,7 @@ import {
   Grid,
   TextField,
   Typography,
+  Button,
 } from "@material-ui/core";
 import { useState } from "react";
 import { db } from "../service/firebase";
@@ -190,15 +191,18 @@ const Contact = () => {
             />
           </Grid>
           <Grid item container justify="center">
-            <button
+            <Button
               variant="contained"
               type="submit"
               size="medium"
               className={classes.submitBtn}
-              style={{ background: loader ? "#ccc" : "#FF7193" }}
+              style={{
+                background: loader ? "#ccc" : "#FF7193",
+                textTransform: "none",
+              }}
             >
               Submit
-            </button>
+            </Button>
           </Grid>
         </Grid>
       </form>

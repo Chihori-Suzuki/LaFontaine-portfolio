@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Alert } from "@material-ui/lab";
 import Logout from "../comps/Logout";
 
-const useStyle = makeStyles(() => {
+const useStyle = makeStyles((theme) => {
   return {
     topTitle: {
       fontFamily: "Dancing Script",
@@ -19,10 +19,12 @@ const useStyle = makeStyles(() => {
     },
     grid: {
       textAlign: "center",
-      paddingTop: "5%",
-      paddingBottom: "5%",
-      paddingLeft: "30%",
-      paddingRight: "30%",
+      [theme.breakpoints.down("sm")]: {
+        padding: "5% 8%",
+      },
+      [theme.breakpoints.up("md")]: {
+        padding: "5% 20%",
+      },
     },
     label: {
       textAlign: "left",
