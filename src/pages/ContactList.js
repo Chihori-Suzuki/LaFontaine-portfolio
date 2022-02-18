@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 import Logout from "../components/Logout";
 import GridContainer from "../components/GridContainer";
+import TitleText from "../components/fonts/TitleText";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -18,7 +19,7 @@ const useStyle = makeStyles((theme) => {
   };
 });
 
-export default function ContactList() {
+const ContactList = () => {
   const classes = useStyle();
 
   const [contact, setContacts] = useState([]);
@@ -26,7 +27,7 @@ export default function ContactList() {
 
   const ref = firebase.firestore().collection("contacts");
 
-  function getContacts() {
+  const getContacts = () => {
     setLoading(true);
     ref.onSnapshot((querySnapshot) => {
       const items = [];
@@ -46,7 +47,7 @@ export default function ContactList() {
       setContacts(items);
       setLoading(false);
     });
-  }
+  };
   useEffect(() => {
     getContacts();
   }, []);
@@ -57,7 +58,11 @@ export default function ContactList() {
 
   return (
     <GridContainer>
-      {/* <ContactContents /> */}
+      <TitleText
+        text="Contact List"
+        variant="h3"
+        style={{ marginTop: 30, marginBottom: 30 }}
+      />
       {contact.map((item) => (
         <div key={item.id} className={classes.item}>
           <Paper className={classes.paper}>
@@ -93,4 +98,5 @@ export default function ContactList() {
       <Logout />
     </GridContainer>
   );
-}
+};
+export default ContactList;

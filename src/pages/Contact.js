@@ -58,7 +58,7 @@ const Contact = () => {
   let today = new Date();
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
 
@@ -82,7 +82,7 @@ const Contact = () => {
     setName("");
     setEmail("");
     setMessage("");
-  }
+  };
 
   return (
     <div className="contact">

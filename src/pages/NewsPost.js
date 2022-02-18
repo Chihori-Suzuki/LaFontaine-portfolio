@@ -7,17 +7,11 @@ import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
 import Logout from "../components/Logout";
+import TitleText from "../components/fonts/TitleText";
+import GridContainer from "../components/GridContainer";
 
 const useStyle = makeStyles((theme) => {
   return {
-    topTitle: {
-      fontFamily: "Dancing Script",
-      color: "#1C1B1B",
-      marginTo: 0,
-      padding: 0,
-      fontSize: "80px",
-      fontWeight: "300",
-    },
     grid: {
       paddingTop: "5%",
       paddingBottom: "5%",
@@ -35,17 +29,26 @@ const useStyle = makeStyles((theme) => {
 });
 const NewPost = () => {
   const classes = useStyle();
-  const topTitle = "Create Latest News";
   const [error, setError] = useState("");
-  const { logout } = useAuth();
   const history = useHistory();
-  const [title, setTitle] = useState(history.location.state.item.title);
-  const [detail, setDetail] = useState(history.location.state.item.detail);
+  console.log("his: ", history);
+  const TITLE_FIELD = history.location.state.item
+    ? history.location.state.item.title
+    : null;
+  const DERAIL_FIELD = history.location.state.item
+    ? history.location.state.item.detail
+    : null;
+  const IMAGE_FIELD = history.location.state.item
+    ? history.location.state.item.image
+    : null;
+
+  const [title, setTitle] = useState(TITLE_FIELD);
+  const [detail, setDetail] = useState(DERAIL_FIELD);
+  const [url, setUrl] = useState(IMAGE_FIELD);
   let today = new Date();
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
   const [image, setImage] = useState(null);
-  const [url, setUrl] = useState(history.location.state.item.image);
   const [progress, setProgress] = useState(0);
 
   const ref = firebase.firestore().collection("news");
@@ -83,7 +86,7 @@ const NewPost = () => {
   };
 
   // add to firestore database
-  function addNews(addNews) {
+  const addNews = (addNews) => {
     ref
       .doc(addNews.id)
       .set(addNews)
@@ -91,9 +94,10 @@ const NewPost = () => {
         console.error(err);
       });
     history.push("/news");
-  }
+    console.log("historyNew", history);
+  };
   // update
-  function editNews(updatedNews) {
+  const editNews = (updatedNews) => {
     ref
       .doc(updatedNews.id)
       .update(updatedNews)
@@ -101,19 +105,18 @@ const NewPost = () => {
         console.error(err);
       });
     history.push("/news");
-  }
+    console.log("historyEdit", history);
+  };
 
   return (
     <div>
-      <Grid
-        container
-        className={classes.grid}
-        direction="column"
-        alignItems="center"
-        spacing={3}
-      >
+      <GridContainer spacing={2}>
         <Grid item>
-          <h1 className={classes.topTitle}>{topTitle}</h1>
+          <TitleText
+            text="Create Latest News"
+            variant="h3"
+            style={{ marginTop: 30 }}
+          />
         </Grid>
         <Grid item>{error && <Alert severity="error">{error}</Alert>}</Grid>
         <Grid item>
@@ -122,7 +125,7 @@ const NewPost = () => {
         <Grid item container>
           <TextField
             id="title"
-            // value={title}
+            value={title}
             defaultValue={
               history.location.state.isEdit
                 ? history.location.state.item.title
@@ -140,11 +143,7 @@ const NewPost = () => {
           <TextField
             id="text"
             className={classes.TextField}
-            defaultValue={
-              history.location.state.isEdit
-                ? history.location.state.item.detail
-                : ""
-            }
+            defaultValue={history.location.state.isEdit ? TITLE_FIELD : ""}
             fullWidth
             label="text"
             multiline
@@ -172,6 +171,7 @@ const NewPost = () => {
             alt="image"
             width="100%"
             height="auto%"
+            alt="postImage"
           ></img>
         </Grid>
 
@@ -200,8 +200,9 @@ const NewPost = () => {
             submit
           </Button>
         </Grid>
-      </Grid>
-      <Logout />
+
+        <Logout />
+      </GridContainer>
     </div>
   );
 };

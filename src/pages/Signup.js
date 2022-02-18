@@ -5,18 +5,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
 import Logout from "../components/Logout";
+import TitleText from "../components/fonts/TitleText";
 
 const useStyle = makeStyles((theme) => {
   return {
-    topTitle: {
-      fontFamily: "Dancing Script",
-      color: "#1C1B1B",
-      marginTo: 0,
-      marginBottom: "15%",
-      padding: 0,
-      fontSize: "80px",
-      fontWeight: "300",
-    },
     grid: {
       textAlign: "center",
       [theme.breakpoints.down("sm")]: {
@@ -45,7 +37,6 @@ const useStyle = makeStyles((theme) => {
 });
 const Signup = () => {
   const classes = useStyle();
-  const topTitle = "Sign up";
   const emailRef = useRef();
   const passRef = useRef();
   const passComfRef = useRef();
@@ -54,7 +45,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (passRef.current.value !== passComfRef.current.value) {
@@ -69,7 +60,7 @@ const Signup = () => {
       setError("Failed to create an account");
     }
     setLoading(false);
-  }
+  };
 
   return (
     <div>
@@ -82,7 +73,7 @@ const Signup = () => {
           spacing={3}
         >
           <Grid item>
-            <h1 className={classes.topTitle}>{topTitle}</h1>
+            <TitleText text="Sign up" variant="h3" />
           </Grid>
           <Grid item>{error && <Alert severity="error">{error}</Alert>}</Grid>
           <Grid item container>
@@ -128,9 +119,9 @@ const Signup = () => {
               Sign up
             </Button>
           </Grid>
+          <Logout style={{ marginTop: 30, marginBottom: 30 }} />
         </Grid>
       </form>
-      <Logout />
     </div>
   );
 };

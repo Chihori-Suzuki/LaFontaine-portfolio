@@ -1,4 +1,5 @@
 import { Grid, makeStyles, Paper } from "@material-ui/core";
+import TitleText from "../components/fonts/TitleText";
 
 const TOP_TITLE = "La Fontaine...";
 const useStyle = makeStyles((theme) => {
@@ -20,13 +21,16 @@ const useStyle = makeStyles((theme) => {
       transform: "translate(-50%,-50%)",
       margin: 0,
       padding: 0,
-
       [theme.breakpoints.down("sm")]: {
         fontSize: "36px",
         fontWeight: "300",
       },
-      [theme.breakpoints.up("md")]: {
+      [theme.breakpoints.up("sm")]: {
         fontSize: "70px",
+        fontWeight: "300",
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: "90px",
         fontWeight: "300",
       },
       [theme.breakpoints.up("lg")]: {
@@ -38,82 +42,33 @@ const useStyle = makeStyles((theme) => {
       position: "absolute",
       color: theme.palette.font.secondary,
       textAlign: "center",
+      left: "50%",
+      fontWeight: "300",
       [theme.breakpoints.down("sm")]: {
         letterSpacing: ".15em",
-        top: "70%",
-        left: "50%",
+        top: "60%",
         fontSize: "12px",
-        fontWeight: "300",
+      },
+      [theme.breakpoints.up("sm")]: {
+        letterSpacing: ".15em",
+        top: "65%",
+        fontSize: "18px",
       },
       [theme.breakpoints.up("md")]: {
         letterSpacing: ".25em",
         top: "60%",
-        left: "50%",
         fontSize: "23px",
-        fontWeight: "300",
-      },
-      [theme.breakpoints.up("lg")]: {
-        letterSpacing: "0.25em",
-        top: "60%",
-        left: "50%",
-        fontSize: "25px",
-        fontWeight: "500",
       },
       transform: "translate(-50%,-50%)",
     },
-
-    title: {
-      fontFamily: "Dancing Script",
-      textAlign: "center",
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "40px",
-        fontWeight: "500",
-      },
-      [theme.breakpoints.up("md")]: {
-        fontSize: "50px",
-        fontWeight: "600",
-      },
-      [theme.breakpoints.up("lg")]: {
-        fontSize: "60px",
-        fontWeight: "700",
-      },
-    },
     paper: {
       background: "#FFF",
-      paddingLeft: "20%",
-      paddingRight: "20%",
-      paddingTop: "5%",
-      paddingBottom: "10%",
-    },
-    gridcon: {
-      marginLeft: "10%",
-      marginRight: "10%",
-    },
-    griditem: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    box: {
-      border: "solid",
-      borderWidth: "thin",
-      margin: "2rem",
-      padding: "2rem 2rem",
-    },
-    box1: {
-      display: "flex",
-      flexDirection: "column",
-      height: "100%",
-    },
-    paraTitle: {
-      fontSize: "32px",
-      fontWeight: 400,
-      letterSpacing: "0.2rem",
-    },
-    paragraph: {
-      fontSize: "20px",
-      fontWeight: 200,
-      lineHeight: "2rem",
-      textAlign: "left",
+      [theme.breakpoints.down("sm")]: {
+        padding: "8% 10%",
+      },
+      [theme.breakpoints.up("sm")]: {
+        padding: "8% 20%",
+      },
     },
     youtube: {
       position: "relative",
@@ -132,14 +87,18 @@ const Home = () => {
   return (
     <div className="home">
       <Paper className={classes.topPaper} elevation={0}>
-        <img className={classes.image} src="topImage.jpg"></img>
+        <img
+          className={classes.image}
+          src="/image/topImage.jpg"
+          // alt="topImage"
+        ></img>
         <h1 className={classes.topTitle}>{TOP_TITLE}</h1>
         <h2 className={classes.subtitle}>
           Ladies singers in Utsunomiya & Tokyo
         </h2>
       </Paper>
       <Paper className={classes.paper}>
-        <p className={classes.title}>Our music</p>
+        <TitleText variant="h3" text="Our music" style={{ marginBottom: 30 }} />
         <Grid container className={classes.youtube}>
           <iframe
             className={classes.iframe}

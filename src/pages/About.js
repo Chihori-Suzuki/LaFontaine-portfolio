@@ -109,6 +109,7 @@ const About = () => {
           src="/image/aboutbelow.jpg"
           width="100%"
           height="auto"
+          alt="aboutBelowImage"
         />
       </GridContainer>
     </div>

@@ -10,18 +10,10 @@ import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
+import TitleText from "../components/fonts/TitleText";
 
 const useStyle = makeStyles((theme) => {
   return {
-    topTitle: {
-      fontFamily: "Dancing Script",
-      color: "#1C1B1B",
-      marginTo: 0,
-      marginBottom: "15%",
-      padding: 0,
-      fontSize: "80px",
-      fontWeight: "300",
-    },
     grid: {
       textAlign: "center",
       [theme.breakpoints.down("sm")]: {
@@ -53,13 +45,11 @@ const useStyle = makeStyles((theme) => {
       textDecoration: "none",
       fontSize: 24,
       color: "#FF7193",
-      // padding: 10,
     },
   };
 });
 const Login = () => {
   const classes = useStyle();
-  const topTitle = "Login";
   const emailRef = useRef();
   const passRef = useRef();
   const { currentUser, login } = useAuth();
@@ -90,7 +80,7 @@ const Login = () => {
         spacing={3}
       >
         <Grid item>
-          <h1 className={classes.topTitle}>{topTitle}</h1>
+          <TitleText variant="h2" text="Log in" style={{ mrginBottom: 30 }} />
         </Grid>
         <Grid item>{error && <Alert severity="error">{error}</Alert>}</Grid>
         <Grid item container>

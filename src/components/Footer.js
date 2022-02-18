@@ -22,6 +22,7 @@ const useStyle = makeStyles((theme) => {
     footer: {
       backgroundColor: theme.palette.background.main,
       width: "100%",
+      marginTop: "auto",
     },
     text: {
       color: theme.palette.font.main,
@@ -51,7 +52,7 @@ const useStyle = makeStyles((theme) => {
     },
   };
 });
-export default function Footer() {
+const Footer = () => {
   const classes = useStyle();
   const [lang, setLang] = useState("jp");
   const { t, i18n } = useTranslation();
@@ -151,4 +152,5 @@ export default function Footer() {
       </Grid>
     </footer>
   );
-}
+};
+export default Footer;

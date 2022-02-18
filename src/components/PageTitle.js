@@ -40,7 +40,7 @@ const PageTitle = ({ title, image }) => {
   const classes = useStyle();
   return (
     <Paper className={classes.topPaper} elevation={0}>
-      <img className={classes.image} src={image}></img>
+      <img className={classes.image} src={image} alt="pageTopImage"></img>
       <Typography variant="h3" className={classes.topTitle}>
         {title}
       </Typography>

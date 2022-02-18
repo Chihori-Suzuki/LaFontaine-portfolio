@@ -23,7 +23,7 @@ const useStyle = makeStyles((theme) => {
   };
 });
 
-const GridContainer = ({ style, children }) => {
+const GridContainer = ({ style, spacing, children }) => {
   const classes = useStyle();
   return (
     <Grid
@@ -33,6 +33,7 @@ const GridContainer = ({ style, children }) => {
       alignItems="center"
       className={classes.grid}
       style={style}
+      spacing={spacing}
     >
       {children}
     </Grid>

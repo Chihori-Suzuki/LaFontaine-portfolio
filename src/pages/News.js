@@ -1,4 +1,11 @@
-import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  makeStyles,
+  Paper,
+  Typography,
+  Box,
+} from "@material-ui/core";
 import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -12,6 +19,14 @@ const TOP_IMAGE = "/image/News.jpg";
 
 const useStyle = makeStyles((theme) => {
   return {
+    loding: {
+      marginTop: 60,
+      marginBottom: 300,
+      height: "100%",
+      textAlign: "center",
+      fontFamily: "Roboto",
+      color: theme.palette.font.black,
+    },
     image: {
       float: "left",
       margin: "auto",
@@ -30,7 +45,7 @@ const useStyle = makeStyles((theme) => {
       textAlign: "center",
     },
     updateBtn: {
-      background: "#FF7193",
+      background: theme.palette.button.main,
       color: theme.palette.font.secondary,
       margin: "3%",
       textTransform: "none",
@@ -49,7 +64,7 @@ const News = () => {
 
   const ref = firebase.firestore().collection("news");
 
-  function getNews() {
+  const getNews = () => {
     setLoading(true);
     ref.onSnapshot((querySnapshot) => {
       const items = [];
@@ -69,17 +84,13 @@ const News = () => {
       setNews(items);
       setLoading(false);
     });
-  }
+  };
   useEffect(() => {
     getNews();
   }, []);
 
-  if (loading) {
-    return <Typography variant="h4">Loading...</Typography>;
-  }
-
   // delete the data from firestore database
-  function deleteNews(delNews) {
+  const deleteNews=(delNews)=> {
     window.confirm("データを削除してもいいですか？");
     ref
       .doc(delNews.id)
@@ -87,6 +98,14 @@ const News = () => {
       .catch((err) => {
         console.error(err);
       });
+  }
+
+  if (loading) {
+    return (
+      <Box className={classes.loding}>
+        <Typography variant="h4">Loading...</Typography>
+      </Box>
+    );
   }
 
   return (
@@ -103,6 +122,7 @@ const News = () => {
                     className={classes.image}
                     height="auto"
                     width="100%"
+                    alt="newsContentImage"
                   />
                 </Grid>
                 <Grid

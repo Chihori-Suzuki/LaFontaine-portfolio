@@ -1,4 +1,4 @@
-import { Box, Button, Grid, makeStyles } from "@material-ui/core";
+import { Box, Button, makeStyles } from "@material-ui/core";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
@@ -35,7 +35,7 @@ const Logout = ({ style }) => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  async function handleLogout() {
+  const handleLogout = async () => {
     setError("");
     try {
       await logout();
@@ -43,7 +43,7 @@ const Logout = ({ style }) => {
     } catch {
       setError("Failed to log out");
     }
-  }
+  };
 
   return (
     <Box id="logout" className={classes.container} style={style}>
