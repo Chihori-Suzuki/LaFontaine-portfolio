@@ -1,65 +1,96 @@
-import { Grid, makeStyles } from "@material-ui/core";
-import React from "react";
-import ContactContents from "../comps/ContactContents";
-// import { useState } from "react";
-// import { useAuth } from "../contexts/AuthContext";
-// import { useHistory } from "react-router";
-import Logout from "../comps/Logout";
+import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import firebase from "../service/firebase";
+import Logout from "../components/Logout";
+import GridContainer from "../components/GridContainer";
 
 const useStyle = makeStyles((theme) => {
   return {
-    grid: {
-      display: "block",
-      paddingTop: "5%",
-      paddingBottom: "5%",
-
-      [theme.breakpoints.down("sm")]: {
-        paddingLeft: "10%",
-        paddingRight: "10%",
-      },
-      [theme.breakpoints.up("md")]: {
-        paddingLeft: "20%",
-        paddingRight: "20%",
-      },
-      [theme.breakpoints.up("lg")]: {
-        paddingLeft: "25%",
-        paddingRight: "25%",
-      },
-      btn: {
-        background: "#FF7193",
-        color: "white",
-      },
-      link: {
-        textDecoration: "none",
-      },
+    item: {
+      width: "100%",
+    },
+    paper: {
+      textAlign: "left",
+      padding: "5%",
+      marginTop: "2%",
+      marginBottom: "5%",
     },
   };
 });
 
 export default function ContactList() {
   const classes = useStyle();
-  // const [ error, setError ] = useState("");
-  // const { currentUser, logout } = useAuth();
-  // const history = useHistory();
 
-  // async function handleLogout() {
-  //   setError("");
-  //   try {
-  //     await logout();
-  //     history.push("/login");
-  //   } catch {
-  //     setError("Failed to log out");
-  //   }
-  // }
+  const [contact, setContacts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const ref = firebase.firestore().collection("contacts");
+
+  function getContacts() {
+    setLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+
+      items.sort(function (a, b) {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
+      });
+      setContacts(items);
+      setLoading(false);
+    });
+  }
+  useEffect(() => {
+    getContacts();
+  }, []);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
-    <Grid
-      container
-      className={classes.grid}
-      direction="column"
-      alignItems="center"
-    >
-      <ContactContents />
+    <GridContainer>
+      {/* <ContactContents /> */}
+      {contact.map((item) => (
+        <div key={item.id} className={classes.item}>
+          <Paper className={classes.paper}>
+            <Grid container wrap="nowrap" direction="column" spacing={2}>
+              <Grid item>
+                <Typography variant="h6">Name:</Typography>
+                <Typography variant="body1" gutterBottom>
+                  {item.name}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">Email:</Typography>
+                <Typography variant="body1" gutterBottom>
+                  {item.email}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">Message:</Typography>
+                <Typography variant="body1" gutterBottom>
+                  {item.message}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">Date:</Typography>
+                <Typography variant="body1" gutterBottom>
+                  {item.date}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Paper>
+        </div>
+      ))}
       <Logout />
-    </Grid>
+    </GridContainer>
   );
 }

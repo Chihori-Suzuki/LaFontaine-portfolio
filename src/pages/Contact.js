@@ -1,5 +1,4 @@
 import {
-  Paper,
   makeStyles,
   Grid,
   TextField,
@@ -10,75 +9,31 @@ import { useState } from "react";
 import { db } from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
+import PageTitle from "../components/PageTitle";
+import GridContainer from "../components/GridContainer";
+
+const TOP_TITLE = "Contact";
+const TOP_IMAGE = "/image/topImage.jpg";
 
 const useStyle = makeStyles((theme) => {
   return {
-    topPaper: {
-      display: "block",
-      position: "relative",
-    },
-    image: {
-      width: "100%",
-      height: "100%",
-    },
-    topTitle: {
-      fontFamily: "Dancing Script",
-      position: "absolute",
-      color: "white",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%,-50%)",
-      margin: 0,
-      padding: 0,
-
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "60px",
-        fontWeight: "500",
-      },
-      [theme.breakpoints.up("md")]: {
-        fontSize: "70px",
-        fontWeight: "600",
-      },
-      [theme.breakpoints.up("lg")]: {
-        fontSize: "100px",
-        fontWeight: "700",
-      },
-    },
-    grid: {
-      paddingTop: "8%",
-      paddingBottom: "8%",
-      textAlign: "center",
-
-      [theme.breakpoints.down("sm")]: {
-        paddingLeft: "10%",
-        paddingRight: "10%",
-      },
-      [theme.breakpoints.up("md")]: {
-        paddingLeft: "20%",
-        paddingRight: "20%",
-      },
-      [theme.breakpoints.up("lg")]: {
-        paddingLeft: "25%",
-        paddingRight: "25%",
-      },
-    },
-
+    title: { marginBottom: 20, color: theme.palette.font.black },
     paragraph: {
       maxWidth: "100vw",
       overflowWrap: "break-word",
       textAlign: "center",
-      fontSize: "18px",
       fontWeight: "300",
       marginBottom: "10%",
       lineHeight: "1.5em",
       whiteSpace: "pre-wrap",
+      color: theme.palette.font.black,
     },
     flex: {
       flexGrow: 1,
       margin: theme.spacing(1),
     },
     submitBtn: {
-      color: "white",
+      color: theme.palette.font.secondary,
       fontSize: "16px",
       background: "#FF7193",
       margin: "5%",
@@ -94,7 +49,6 @@ const useStyle = makeStyles((theme) => {
 
 const Contact = () => {
   const classes = useStyle();
-  const topTitle = "Contact";
   const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -132,15 +86,11 @@ const Contact = () => {
 
   return (
     <div className="contact">
-      <Paper className={classes.topPaper} elevation={0}>
-        <img className={classes.image} src="topImage.jpg"></img>
-        <h1 className={classes.topTitle}>{topTitle}</h1>
-      </Paper>
-
+      <PageTitle title={TOP_TITLE} image={TOP_IMAGE} />
       <form onSubmit={handleSubmit}>
-        <Grid container direction="column" className={classes.grid}>
+        <GridContainer>
           <Grid item>
-            <Typography variant="h5" style={{ marginBottom: 20 }}>
+            <Typography variant="h5" className={classes.title}>
               {t("contact.title")}
             </Typography>
           </Grid>
@@ -150,7 +100,7 @@ const Contact = () => {
             </Typography>
           </Grid>
           <Grid item container spacing={2}>
-            <Grid item sm={12} md={6}>
+            <Grid item container sm={12} md={6}>
               <TextField
                 required
                 className={classes.flex}
@@ -162,7 +112,7 @@ const Contact = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
-            <Grid item sm={12} md={6}>
+            <Grid item container sm={12} md={6}>
               <TextField
                 required
                 className={classes.flex}
@@ -176,7 +126,7 @@ const Contact = () => {
               />
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid item container>
             <TextField
               required
               className={classes.flex}
@@ -204,7 +154,7 @@ const Contact = () => {
               Submit
             </Button>
           </Grid>
-        </Grid>
+        </GridContainer>
       </form>
     </div>
   );

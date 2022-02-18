@@ -8,7 +8,6 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
-import {} from "@material-ui/core";
 import {
   Instagram as InstagramIcon,
   Facebook as FacebookIcon,
@@ -16,25 +15,18 @@ import {
 } from "@material-ui/icons";
 
 import { useTranslation } from "react-i18next";
+import Logo from "./fonts/Logo";
 
 const useStyle = makeStyles((theme) => {
   return {
     footer: {
-      backgroundColor: "#FFCFDB",
+      backgroundColor: theme.palette.background.main,
       width: "100%",
     },
-    title: {
-      fontFamily: "Ruthie",
-      fontSize: "45px",
-      color: "#FF81A6",
-      marginBottom: "3%",
-      marginTop: "3%",
-      fontWeight: "500",
-    },
     text: {
-      color: "#FF81A6",
+      color: theme.palette.font.main,
+      fontFamily: "Roboto",
       fontWeight: "400",
-      fontSize: 15,
       textAlign: "center",
     },
     grid: {
@@ -49,11 +41,12 @@ const useStyle = makeStyles((theme) => {
       alignItems: "center",
     },
     icon: {
-      color: "#FF81A6",
+      color: theme.palette.font.main,
       fontSize: 25,
+      marginRight: 5,
     },
     toggle: {
-      color: "#FF81A6",
+      color: theme.palette.font.main,
       border: "1px solid #FF81A6",
     },
   };
@@ -79,14 +72,14 @@ export default function Footer() {
           xs={12}
           sm={6}
         >
-          <p className={classes.title}>La Fontaine...</p>
+          <Logo variant="h4" style={{ marginBottom: "3%", marginTop: "3%" }} />
           <Typography variant="subtitle2" className={classes.text}>
             {t("footer.greeting1")}
           </Typography>
           <Typography variant="subtitle2" className={classes.text} gutterBottom>
             {t("footer.greeting2")}
           </Typography>
-          <Link href="/login" className={classes.text}>
+          <Link href="/login" variant="body2" className={classes.text}>
             {t("footer.login")}
           </Link>
 
@@ -122,7 +115,7 @@ export default function Footer() {
           sm={6}
           md={4}
         >
-          <Typography variant="subtitle1" className={classes.text}>
+          <Typography variant="body2" className={classes.text}>
             {t("footer.sns")}
           </Typography>
           <IconButton

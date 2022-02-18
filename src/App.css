@@ -1,15 +1,3 @@
-/* @import url("/Users/suzukichihori/Cornerstone/WMAD/React/lafontaine-web/public/topImage.jpg"); */
-/* body {
-  background-image: "topImage.jpg";
-  background-size: contain;
-  background-position: top;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -10,39 +10,23 @@ import {
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
+import Logo from "./fonts/Logo";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    color: "#FF81A6",
     textAlign: "left",
-    fontFamily: "Ruthie",
-    fontSize: "48px",
-    fontWeight: "300",
     textDecoration: "none",
-
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "35px",
-      fontWeight: "500",
-    },
-    [theme.breakpoints.up("md")]: {
-      fontSize: "40px",
-    },
-    [theme.breakpoints.up("lg")]: {
-      fontSize: "48px",
-    },
   },
   link: {
-    color: "#FF81A6",
+    color: theme.palette.font.main,
     marginRight: theme.spacing(5),
-    fontFamily: "montserrat",
-    fontWeight: "thin",
+    fontFamily: "Montserrat",
     letterSpacing: "0.1rem",
     textDecoration: "none",
 
     [theme.breakpoints.down("sm")]: {
       fontSize: 16,
-      fontWeight: "500",
     },
     [theme.breakpoints.up("md")]: {
       fontSize: 20,
@@ -67,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   languageBtn: {
-    color: "white",
+    color: theme.palette.font.secondary,
     fontSize: "16px",
     background: "#FF81A6",
     border: "none",
@@ -156,7 +140,7 @@ const Navbar = () => {
       <AppBar position="static" className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
           <Link to="/" className={classes.grow}>
-            La Fontaine...
+            <Logo variant="h4" style={{}} />
           </Link>
           <ResponsiveMenu />
         </Toolbar>

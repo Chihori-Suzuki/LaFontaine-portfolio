@@ -10,7 +10,7 @@ import News from "../pages/News";
 import NewPost from "../pages/NewsPost";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
-import PrivateRoute from "../comps/PrivateRoute";
+import PrivateRoute from "../components/PrivateRoute";
 import ContactList from "../pages/ContactList";
 
 const useStyle = makeStyles((theme) => {
@@ -18,13 +18,12 @@ const useStyle = makeStyles((theme) => {
     root: {
       minHeight: "100vh",
       position: "relative",
-      //   display: "flex",
     },
     toolbar: theme.mixins.toolbar,
   };
 });
 
-function Layout() {
+const Layout = () => {
   const classes = useStyle();
   return (
     <Router>
@@ -57,6 +56,6 @@ function Layout() {
       </div>
     </Router>
   );
-}
+};
 
 export default Layout;

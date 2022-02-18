@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
-import Logout from "../comps/Logout";
+import Logout from "../components/Logout";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -39,7 +39,7 @@ const useStyle = makeStyles((theme) => {
     },
     loginbtn: {
       background: "#FF7193",
-      color: "white",
+      color: theme.palette.font.secondary,
     },
   };
 });

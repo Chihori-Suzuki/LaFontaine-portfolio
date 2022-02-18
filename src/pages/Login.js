@@ -32,7 +32,7 @@ const useStyle = makeStyles((theme) => {
       },
     },
     loginbtn: {
-      color: "white",
+      color: theme.palette.font.secondary,
       fontSize: "16px",
       background: "#FF7193",
       margin: "5%",
@@ -46,7 +46,7 @@ const useStyle = makeStyles((theme) => {
     },
     menuItems: {
       "&:hover": {
-        backgroundColor: "#FFCFDB",
+        backgroundColor: theme.palette.background.main,
       },
     },
     link: {

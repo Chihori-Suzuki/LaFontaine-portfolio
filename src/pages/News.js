@@ -1,98 +1,160 @@
-import { Paper, makeStyles, Grid } from "@material-ui/core";
-import NewsContents from "../comps/NewsContents";
-import { useState } from "react";
+import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import firebase from "../service/firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { useHistory } from "react-router";
+import Logout from "../components/Logout";
+import { Link } from "react-router-dom";
+import PageTitle from "../components/PageTitle";
+import GridContainer from "../components/GridContainer";
+
+const TOP_TITLE = "News";
+const TOP_IMAGE = "/image/News.jpg";
 
 const useStyle = makeStyles((theme) => {
   return {
-    topPaper: {
-      display: "block",
-      position: "relative",
-    },
     image: {
+      float: "left",
+      margin: "auto",
+      display: "block",
+    },
+    paper: {
+      display: "flex",
+      padding: "5%",
       width: "100%",
-      height: "100%",
+      marginBottom: "5%",
+      color: theme.palette.font.black,
     },
-    topTitle: {
-      fontFamily: "Dancing Script",
-      position: "absolute",
-      color: "white",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%,-50%)",
-      margin: 0,
-      padding: 0,
-
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "60px",
-        fontWeight: "500",
-      },
-      [theme.breakpoints.up("md")]: {
-        fontSize: "70px",
-        fontWeight: "600",
-      },
-      [theme.breakpoints.up("lg")]: {
-        fontSize: "100px",
-        fontWeight: "700",
-      },
+    item2: {
+      overflowWrap: "break-word",
+      overflow: "hidden",
+      textAlign: "center",
     },
-    grid: {
-      paddingTop: "5%",
-      paddingBottom: "5%",
-
-      [theme.breakpoints.down("sm")]: {
-        paddingLeft: "10%",
-        paddingRight: "10%",
-      },
-      [theme.breakpoints.up("md")]: {
-        paddingLeft: "20%",
-        paddingRight: "20%",
-      },
-      [theme.breakpoints.up("lg")]: {
-        paddingLeft: "25%",
-        paddingRight: "25%",
-      },
-      btn: {
-        background: "#FF7193",
-        color: "white",
-      },
-      link: {
-        textDecoration: "none",
-      },
+    updateBtn: {
+      background: "#FF7193",
+      color: theme.palette.font.secondary,
+      margin: "3%",
+      textTransform: "none",
+    },
+    link: {
+      textDecoration: "none",
     },
   };
 });
 
 const News = () => {
   const classes = useStyle();
-  const topTitle = "News";
-  const { currentUser, logout } = useAuth();
-  const history = useHistory();
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { currentUser } = useAuth();
 
-  // async function handleLogout() {
-  //   setError("");
-  //   try {
-  //     await logout();
-  //     history.push("/login");
-  //   } catch {
-  //     setError("Failed to log out");
-  //   }
-  // }
+  const ref = firebase.firestore().collection("news");
+
+  function getNews() {
+    setLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+
+      items.sort(function (a, b) {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
+      });
+      setNews(items);
+      setLoading(false);
+    });
+  }
+  useEffect(() => {
+    getNews();
+  }, []);
+
+  if (loading) {
+    return <Typography variant="h4">Loading...</Typography>;
+  }
+
+  // delete the data from firestore database
+  function deleteNews(delNews) {
+    window.confirm("データを削除してもいいですか？");
+    ref
+      .doc(delNews.id)
+      .delete()
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   return (
     <div className="news">
-      <Paper className={classes.topPaper} elevation={0}>
-        <img className={classes.image} src="News.jpg"></img>
-        <h1 className={classes.topTitle}>{topTitle}</h1>
-      </Paper>
-      <Grid
-        container
-        className={classes.grid}
-        direction="column"
-        alignItems="center"
-      >
-        <NewsContents />
-      </Grid>
+      <PageTitle title={TOP_TITLE} image={TOP_IMAGE} />
+      <GridContainer>
+        {news.map((item) => (
+          <div key={item.id}>
+            <Paper className={classes.paper}>
+              <Grid container wrap="nowrap" direction="column" spacing={2}>
+                <Grid item>
+                  <img
+                    src={item.image}
+                    className={classes.image}
+                    height="auto"
+                    width="100%"
+                  />
+                </Grid>
+                <Grid
+                  item
+                  className={classes.item2}
+                  container
+                  direction="column"
+                  spacing={3}
+                >
+                  <Grid item>
+                    <Typography
+                      variant="h6"
+                      style={{ marginTop: 10, marginBottom: 5 }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body1">{item.date}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <div style={{ whiteSpace: "pre-line" }}>
+                      <Typography variant="body2">{item.detail}</Typography>
+                    </div>
+                  </Grid>
+                  {currentUser ? (
+                    <Grid item container direction="column" justify="center">
+                      <Grid item>
+                        <Link
+                          to={{
+                            pathname: "/post",
+                            state: { isEdit: true, item },
+                          }}
+                          className={classes.link}
+                        >
+                          <Button className={classes.updateBtn}>Edit</Button>
+                        </Link>
+                        <Button
+                          className={classes.updateBtn}
+                          onClick={() => deleteNews(item)}
+                        >
+                          Delete
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  ) : null}
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
+        ))}
+
+        <Logout style={{ marginTop: 10 }} />
+      </GridContainer>
     </div>
   );
 };

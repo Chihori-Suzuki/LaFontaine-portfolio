@@ -6,15 +6,14 @@ import { useHistory } from "react-router";
 import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
-import Logout from "../comps/Logout";
+import Logout from "../components/Logout";
 
-const useStyle = makeStyles(() => {
+const useStyle = makeStyles((theme) => {
   return {
     topTitle: {
       fontFamily: "Dancing Script",
       color: "#1C1B1B",
       marginTo: 0,
-      //   marginBottom: "1%",
       padding: 0,
       fontSize: "80px",
       fontWeight: "300",
@@ -30,7 +29,7 @@ const useStyle = makeStyles(() => {
     },
     submitbtn: {
       background: "#FF7193",
-      color: "white",
+      color: theme.palette.font.secondary,
     },
   };
 });
@@ -100,7 +99,7 @@ const NewPost = () => {
       .update(updatedNews)
       .catch((err) => {
         console.error(err);
-      })
+      });
     history.push("/news");
   }
 
@@ -182,11 +181,11 @@ const NewPost = () => {
             className={classes.submitbtn}
             onClick={() => {
               history.location.state.isEdit
-                ? editNews({ 
-                    title, 
-                    detail, 
-                    date: history.location.state.item.date, 
-                    image: url, 
+                ? editNews({
+                    title,
+                    detail,
+                    date: history.location.state.item.date,
+                    image: url,
                     id: history.location.state.item.id,
                   })
                 : addNews({

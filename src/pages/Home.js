@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Paper } from "@material-ui/core";
 
+const TOP_TITLE = "La Fontaine...";
 const useStyle = makeStyles((theme) => {
   return {
     topPaper: {
@@ -13,7 +14,7 @@ const useStyle = makeStyles((theme) => {
     topTitle: {
       fontFamily: "Ruthie",
       position: "absolute",
-      color: "white",
+      color: theme.palette.font.secondary,
       top: "50%",
       left: "50%",
       transform: "translate(-50%,-50%)",
@@ -21,11 +22,11 @@ const useStyle = makeStyles((theme) => {
       padding: 0,
 
       [theme.breakpoints.down("sm")]: {
-        fontSize: "50px",
+        fontSize: "36px",
         fontWeight: "300",
       },
       [theme.breakpoints.up("md")]: {
-        fontSize: "80px",
+        fontSize: "70px",
         fontWeight: "300",
       },
       [theme.breakpoints.up("lg")]: {
@@ -35,24 +36,17 @@ const useStyle = makeStyles((theme) => {
     },
     subtitle: {
       position: "absolute",
-      color: "white",
-
-      [theme.breakpoints.down("xs")]: {
-        letterSpacing: "0.25em",
+      color: theme.palette.font.secondary,
+      textAlign: "center",
+      [theme.breakpoints.down("sm")]: {
+        letterSpacing: ".15em",
         top: "70%",
         left: "50%",
-        fontSize: "16px",
-        fontWeight: "300",
-      },
-      [theme.breakpoints.down("sm")]: {
-        letterSpacing: "0.25em",
-        top: "65%",
-        left: "50%",
-        fontSize: "16px",
+        fontSize: "12px",
         fontWeight: "300",
       },
       [theme.breakpoints.up("md")]: {
-        letterSpacing: "0.25em",
+        letterSpacing: ".25em",
         top: "60%",
         left: "50%",
         fontSize: "23px",
@@ -135,12 +129,11 @@ const useStyle = makeStyles((theme) => {
 });
 const Home = () => {
   const classes = useStyle();
-  const topTitle = "La Fontaine...";
   return (
     <div className="home">
       <Paper className={classes.topPaper} elevation={0}>
         <img className={classes.image} src="topImage.jpg"></img>
-        <h1 className={classes.topTitle}>{topTitle}</h1>
+        <h1 className={classes.topTitle}>{TOP_TITLE}</h1>
         <h2 className={classes.subtitle}>
           Ladies singers in Utsunomiya & Tokyo
         </h2>

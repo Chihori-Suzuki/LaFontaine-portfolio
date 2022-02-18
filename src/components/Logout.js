@@ -1,4 +1,4 @@
-import { Button, Grid, makeStyles } from "@material-ui/core";
+import { Box, Button, Grid, makeStyles } from "@material-ui/core";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
 import { useAuth } from "../contexts/AuthContext";
@@ -6,29 +6,31 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
-const useStyle = makeStyles(() => {
+const useStyle = makeStyles((theme) => {
   return {
-    grid: {
-      marginTop: "5%",
-      marginBottom: "5%",
-      paddingLeft: "10%",
-      paddingRight: "10%",
+    container: {
+      display: "flex",
+      flexDirection: "column",
     },
-    btn: {
+    backBtn: {
       background: "#AFAFAF",
-      color: "white",
-    },
-    link: {
-      textDecoration: "none",
+      color: theme.palette.font.secondary,
     },
     logoutBtn: {
+      width: "100%",
+      color: theme.palette.font.black,
       "&:hover": {
         backgroundColor: "#AFAFAF",
       },
+      marginBottom: 10,
+    },
+    link: {
+      textDecoration: "none",
+      color: theme.palette.font.secondary,
     },
   };
 });
-const Logout = () => {
+const Logout = ({ style }) => {
   const classes = useStyle();
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
@@ -44,35 +46,31 @@ const Logout = () => {
   }
 
   return (
-    <div id="logout">
+    <Box id="logout" className={classes.container} style={style}>
       {error && <Alert severity="error">{error}</Alert>}
       {currentUser ? (
-        <Grid container direction="column" className={classes.grid} spacing={2}>
-          <Grid item container justifyContent="center">
-            <Button
-              variant="link"
-              onClick={handleLogout}
-              className={classes.logoutBtn}
-            >
-              Log out
-            </Button>
-          </Grid>
-          <Grid item container justifyContent="center">
+        <>
+          <Button
+            variant="link"
+            onClick={handleLogout}
+            className={classes.logoutBtn}
+          >
+            Log out
+          </Button>
+          <Button className={classes.backBtn}>
+            <ArrowBackIosIcon />
             <Link
               to={{
                 pathname: "/login",
               }}
               className={classes.link}
             >
-              <Button className={classes.btn}>
-                <ArrowBackIosIcon />
-                Back
-              </Button>
+              Back
             </Link>
-          </Grid>
-        </Grid>
+          </Button>
+        </>
       ) : null}
-    </div>
+    </Box>
   );
 };
 
