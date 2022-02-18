@@ -3,7 +3,7 @@ import Brightness1Icon from "@material-ui/icons/Brightness1";
 import { useTranslation } from "react-i18next";
 import Logo from "../components/fonts/Logo.js";
 import GridContainer from "../components/GridContainer.js";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/fonts/PageTitle";
 
 const TOP_TITLE = "About us";
 const TOP_IMAGE = "/image/about.jpg";

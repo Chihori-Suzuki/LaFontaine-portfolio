@@ -6,7 +6,7 @@ import "./service/firebase";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./contexts/i18n";
 import { ThemeProvider } from "@material-ui/core";
-import theme from "./assets/theme/theme";
+import theme from "./../src/theme/theme";
 
 function App() {
   return (

@@ -4,6 +4,7 @@ import firebase from "../service/firebase";
 import Logout from "../components/Logout";
 import GridContainer from "../components/GridContainer";
 import TitleText from "../components/fonts/TitleText";
+import Loading from "../components/fonts/Loading";
 
 const useStyle = makeStyles((theme) => {
   return {
@@ -27,34 +28,32 @@ const ContactList = () => {
 
   const ref = firebase.firestore().collection("contacts");
 
-  const getContacts = () => {
-    setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-
-      items.sort(function (a, b) {
-        if (a.date < b.date) {
-          return 1;
-        }
-        if (a.date > b.date) {
-          return -1;
-        }
-        return 0;
-      });
-      setContacts(items);
-      setLoading(false);
-    });
-  };
   useEffect(() => {
+    const getContacts = () => {
+      setLoading(true);
+      ref.onSnapshot((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        });
+
+        items.sort(function (a, b) {
+          if (a.date < b.date) {
+            return 1;
+          }
+          if (a.date > b.date) {
+            return -1;
+          }
+          return 0;
+        });
+        setContacts(items);
+        setLoading(false);
+      });
+    };
     getContacts();
   }, []);
 
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+  if (loading) return <Loading />;
 
   return (
     <GridContainer>

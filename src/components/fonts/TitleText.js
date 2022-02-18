@@ -16,7 +16,6 @@ const TitleText = ({ text, variant, style }) => {
     <Typography
       variant={variant}
       style={style}
-      className={classes.TitleText}
       align="center"
       className={classes.title}
     >

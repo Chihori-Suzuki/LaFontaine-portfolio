@@ -1,32 +1,18 @@
-import {
-  Button,
-  Grid,
-  makeStyles,
-  Paper,
-  Typography,
-  Box,
-} from "@material-ui/core";
+import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import Logout from "../components/Logout";
 import { Link } from "react-router-dom";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/fonts/PageTitle";
 import GridContainer from "../components/GridContainer";
+import Loading from "../components/fonts/Loading";
 
 const TOP_TITLE = "News";
 const TOP_IMAGE = "/image/News.jpg";
 
 const useStyle = makeStyles((theme) => {
   return {
-    loding: {
-      marginTop: 60,
-      marginBottom: 300,
-      height: "100%",
-      textAlign: "center",
-      fontFamily: "Roboto",
-      color: theme.palette.font.black,
-    },
     image: {
       float: "left",
       margin: "auto",
@@ -35,7 +21,6 @@ const useStyle = makeStyles((theme) => {
     paper: {
       display: "flex",
       padding: "5%",
-      width: "100%",
       marginBottom: "5%",
       color: theme.palette.font.black,
     },
@@ -90,7 +75,7 @@ const News = () => {
   }, []);
 
   // delete the data from firestore database
-  const deleteNews=(delNews)=> {
+  const deleteNews = (delNews) => {
     window.confirm("データを削除してもいいですか？");
     ref
       .doc(delNews.id)
@@ -98,15 +83,9 @@ const News = () => {
       .catch((err) => {
         console.error(err);
       });
-  }
+  };
 
-  if (loading) {
-    return (
-      <Box className={classes.loding}>
-        <Typography variant="h4">Loading...</Typography>
-      </Box>
-    );
-  }
+  if (loading) return <Loading />;
 
   return (
     <div className="news">

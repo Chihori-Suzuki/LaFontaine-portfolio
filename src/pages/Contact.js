@@ -9,7 +9,7 @@ import { useState } from "react";
 import { db } from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/fonts/PageTitle";
 import GridContainer from "../components/GridContainer";
 
 const TOP_TITLE = "Contact";
