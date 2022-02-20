@@ -31,20 +31,19 @@ const NewPost = () => {
   const classes = useStyle();
   const [error, setError] = useState("");
   const history = useHistory();
-  console.log("his: ", history);
-  const TITLE_FIELD = history.location.state.item
+  const titleTextField = history.location.state.item
     ? history.location.state.item.title
-    : null;
-  const DERAIL_FIELD = history.location.state.item
+    : "";
+  const detailTextField = history.location.state.item
     ? history.location.state.item.detail
-    : null;
-  const IMAGE_FIELD = history.location.state.item
+    : "";
+  const imageField = history.location.state.item
     ? history.location.state.item.image
-    : null;
+    : "";
 
-  const [title, setTitle] = useState(TITLE_FIELD);
-  const [detail, setDetail] = useState(DERAIL_FIELD);
-  const [url, setUrl] = useState(IMAGE_FIELD);
+  const [title, setTitle] = useState(titleTextField);
+  const [detail, setDetail] = useState(detailTextField);
+  const [url, setUrl] = useState(imageField);
   let today = new Date();
   let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
 
@@ -125,12 +124,7 @@ const NewPost = () => {
         <Grid item container>
           <TextField
             id="title"
-            value={title}
-            defaultValue={
-              history.location.state.isEdit
-                ? history.location.state.item.title
-                : ""
-            }
+            defaultValue={history.location.state.isEdit ? titleTextField : ""}
             fullWidth
             label="title"
             multiline
@@ -143,7 +137,7 @@ const NewPost = () => {
           <TextField
             id="text"
             className={classes.TextField}
-            defaultValue={history.location.state.isEdit ? TITLE_FIELD : ""}
+            defaultValue={history.location.state.isEdit ? detailTextField : ""}
             fullWidth
             label="text"
             multiline
