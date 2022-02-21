@@ -10,6 +10,8 @@ import Logout from "../components/Logout";
 import TitleText from "../components/fonts/TitleText";
 import GridContainer from "../components/GridContainer";
 
+const { DateTime } = require("luxon");
+
 const useStyle = makeStyles((theme) => {
   return {
     grid: {
@@ -44,8 +46,7 @@ const NewPost = () => {
   const [title, setTitle] = useState(titleTextField);
   const [detail, setDetail] = useState(detailTextField);
   const [url, setUrl] = useState(imageField);
-  let today = new Date();
-  let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
+  const date = DateTime.now().setLocale("zh").toLocaleString();
 
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);

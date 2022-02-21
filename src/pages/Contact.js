@@ -15,6 +15,8 @@ import GridContainer from "../components/GridContainer";
 const TOP_TITLE = "Contact";
 const TOP_IMAGE = "/image/topImage.jpg";
 
+const { DateTime } = require("luxon");
+
 const useStyle = makeStyles((theme) => {
   return {
     title: { marginBottom: 20, color: theme.palette.font.black },
@@ -55,8 +57,7 @@ const Contact = () => {
   const [message, setMessage] = useState("");
 
   const [loader, setLoader] = useState(false);
-  let today = new Date();
-  let date = `${today.getFullYear()} / ${today.getMonth()} / ${today.getDate()}`;
+  const date = DateTime.now().setLocale("zh").toLocaleString(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
