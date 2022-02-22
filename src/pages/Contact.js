@@ -5,12 +5,13 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { db } from "../service/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
 import PageTitle from "../components/fonts/PageTitle";
 import GridContainer from "../components/GridContainer";
+import emailjs from "emailjs-com";
 
 const TOP_TITLE = "Contact";
 const TOP_IMAGE = "/image/topImage.jpg";
@@ -52,12 +53,13 @@ const useStyle = makeStyles((theme) => {
 const Contact = () => {
   const classes = useStyle();
   const { t } = useTranslation();
+  const date = DateTime.now().setLocale("zh").toLocaleString();
+  const form = useRef();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
   const [loader, setLoader] = useState(false);
-  const date = DateTime.now().setLocale("zh").toLocaleString(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,6 +82,22 @@ const Contact = () => {
         setLoader(false);
       });
 
+    emailjs
+      .sendForm(
+        "service_s9wvzhe",
+        "template_ts028yo",
+        form.current,
+        "user_aB1o66z07jQvQuWLStT5y"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+
     setName("");
     setEmail("");
     setMessage("");
@@ -88,7 +106,7 @@ const Contact = () => {
   return (
     <div className="contact">
       <PageTitle title={TOP_TITLE} image={TOP_IMAGE} />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={form}>
         <GridContainer>
           <Grid item>
             <Typography variant="h5" className={classes.title}>
@@ -105,7 +123,8 @@ const Contact = () => {
               <TextField
                 required
                 className={classes.flex}
-                id="name-required"
+                id="name"
+                name="name"
                 fullWidth
                 label="name"
                 variant="outlined"
@@ -118,7 +137,8 @@ const Contact = () => {
                 required
                 className={classes.flex}
                 type="email"
-                id="email-required"
+                id="email"
+                name="email"
                 fullWidth
                 label="email"
                 variant="outlined"
@@ -131,7 +151,8 @@ const Contact = () => {
             <TextField
               required
               className={classes.flex}
-              id="text-required"
+              id="text_body"
+              name="text_body"
               label="message"
               variant="outlined"
               fullWidth
