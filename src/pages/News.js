@@ -126,7 +126,7 @@ const News = () => {
                     </div>
                   </Grid>
                   {currentUser ? (
-                    <Grid item container direction="column" justify="center">
+                    <Grid item container direction="column" justifyContent="center">
                       <Grid item>
                         <Link
                           to={{

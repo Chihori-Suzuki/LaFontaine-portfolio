@@ -64,7 +64,7 @@ const Footer = () => {
 
   return (
     <footer className={classes.footer}>
-      <Grid container className={classes.grid} justify="center">
+      <Grid container className={classes.grid} justifyContent="center">
         <Grid
           item
           md={4}

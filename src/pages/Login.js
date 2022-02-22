@@ -117,7 +117,7 @@ const Login = () => {
         </Grid>
 
         {currentUser ? (
-          <Grid item id="menu" container justify="center" spacing={2}>
+          <Grid item id="menu" container justifyContent="center" spacing={2}>
             <Grid item>
               <Typography variant="subtitle1" gutterBottom>
                 ☆ 会員専用メニュー ☆

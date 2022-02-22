@@ -162,7 +162,7 @@ const Contact = () => {
               onChange={(e) => setMessage(e.target.value)}
             />
           </Grid>
-          <Grid item container justify="center">
+          <Grid item container justifyContent="center">
             <Button
               variant="contained"
               type="submit"

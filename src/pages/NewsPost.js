@@ -1,7 +1,6 @@
 import { Button, Grid, makeStyles, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { Alert } from "@material-ui/lab";
-import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { storage } from "../service/firebase";
 import firebase from "../service/firebase";
@@ -94,7 +93,6 @@ const NewPost = () => {
         console.error(err);
       });
     history.push("/news");
-    console.log("historyNew", history);
   };
   // update
   const editNews = (updatedNews) => {
@@ -148,22 +146,27 @@ const NewPost = () => {
             onChange={(e) => setDetail(e.target.value)}
           />
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <p>載せたい写真を選択してね</p>
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <progress value={progress} max="100" />
         </Grid>
-        <Grid item container justify="center" className={classes.marginBtn}>
+        <Grid
+          item
+          container
+          justifyContent="center"
+          className={classes.marginBtn}
+        >
           <input type="file" onChange={handleChange}></input>
           <Button variant="contained" onClick={handleUpload}>
             Upload
           </Button>
         </Grid>
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           <img
             src={url || "http://via.placeholder.com/100x100"}
-            alt="image"
+            alt="photo"
             width="100%"
             height="auto%"
             alt="postImage"

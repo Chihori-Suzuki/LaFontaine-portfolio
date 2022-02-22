@@ -29,7 +29,7 @@ const GridContainer = ({ style, spacing, children }) => {
     <Grid
       container
       direction="column"
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       className={classes.grid}
       style={style}

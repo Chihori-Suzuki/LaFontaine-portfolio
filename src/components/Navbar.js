@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     color: "#FF7193",
     fontSize: "16px",
+    fontWeight: 300,
     padding: 10,
     textTransform: "none",
   },

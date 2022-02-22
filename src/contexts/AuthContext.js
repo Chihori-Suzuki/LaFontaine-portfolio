@@ -18,6 +18,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = (email, password) => {
+    // setPersistence(auth, browserSessionPersistence)
+    //   .then(() => signInWithEmailAndPassword(email, password))
+    //   .catch((error) => console.log(error.message));
     return auth.signInWithEmailAndPassword(email, password);
   };
 
