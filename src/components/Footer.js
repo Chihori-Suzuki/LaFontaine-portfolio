@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import theme from "../theme/theme";
 
 import {
   Grid,
@@ -86,23 +87,17 @@ const Footer = () => {
 
           <ToggleButtonGroup
             value={lang}
+            color={theme.palette.button.main}
             exclusive
-            onChange={() => setLang(lang === "en" ? "jp" : "en")}
+            onChange={(event, newLang) => setLang(newLang)}
             aria-label="text alignment"
             style={{ marginTop: "5%" }}
+            size="small"
           >
-            <ToggleButton
-              value="left"
-              aria-label="left aligned"
-              className={classes.toggle}
-            >
+            <ToggleButton value="jp" className={classes.toggle}>
               Japanese
             </ToggleButton>
-            <ToggleButton
-              value="left"
-              aria-label="left aligned"
-              className={classes.toggle}
-            >
+            <ToggleButton value="en" className={classes.toggle}>
               English
             </ToggleButton>
           </ToggleButtonGroup>
