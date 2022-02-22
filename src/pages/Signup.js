@@ -55,7 +55,7 @@ const Signup = () => {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passRef.current.value);
-      history.push("/post");
+      history.push("/login");
     } catch {
       setError("Failed to create an account");
     }

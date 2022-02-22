@@ -41,7 +41,6 @@ const NewPost = () => {
   const imageField = history.location.state.item
     ? history.location.state.item.image
     : "";
-
   const [title, setTitle] = useState(titleTextField);
   const [detail, setDetail] = useState(detailTextField);
   const [url, setUrl] = useState(imageField);

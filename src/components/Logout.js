@@ -50,11 +50,7 @@ const Logout = ({ style }) => {
       {error && <Alert severity="error">{error}</Alert>}
       {currentUser ? (
         <>
-          <Button
-            variant="link"
-            onClick={handleLogout}
-            className={classes.logoutBtn}
-          >
+          <Button onClick={handleLogout} className={classes.logoutBtn}>
             Log out
           </Button>
           <Button className={classes.backBtn}>
