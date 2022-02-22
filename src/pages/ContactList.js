@@ -89,7 +89,7 @@ const ContactList = () => {
           </Paper>
         </div>
       ))}
-      <Logout />
+      <Logout style={{ marginTop: 30 }} />
     </GridContainer>
   );
 };

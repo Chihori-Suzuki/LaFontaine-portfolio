@@ -198,7 +198,7 @@ const NewPost = () => {
           </Button>
         </Grid>
 
-        <Logout />
+        <Logout style={{ marginTop: 30 }} />
       </GridContainer>
     </div>
   );
