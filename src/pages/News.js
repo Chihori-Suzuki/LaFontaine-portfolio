@@ -44,13 +44,13 @@ const useStyle = makeStyles((theme) => {
 const News = () => {
   const classes = useStyle();
   const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { currentUser } = useAuth();
 
   const ref = firebase.firestore().collection("news");
 
   const getNews = () => {
-    setLoading(true);
+    // setLoading(true);
     ref.onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
@@ -125,8 +125,13 @@ const News = () => {
                       <Typography variant="body2">{item.detail}</Typography>
                     </div>
                   </Grid>
-                  {currentUser ? (
-                    <Grid item container direction="column" justifyContent="center">
+                  {currentUser && (
+                    <Grid
+                      item
+                      container
+                      direction="column"
+                      justifyContent="center"
+                    >
                       <Grid item>
                         <Link
                           to={{
@@ -145,7 +150,7 @@ const News = () => {
                         </Button>
                       </Grid>
                     </Grid>
-                  ) : null}
+                  )}
                 </Grid>
               </Grid>
             </Paper>

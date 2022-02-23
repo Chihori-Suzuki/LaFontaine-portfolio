@@ -30,7 +30,7 @@ const useStyle = makeStyles((theme) => {
       margin: "5%",
       paddingLeft: "3%",
       paddingRight: "3%",
-      paddingTop: "2%",
+      paddingTop: "2%", 
       paddingBottom: "2%",
       border: "none",
       borderRadius: "4px",
